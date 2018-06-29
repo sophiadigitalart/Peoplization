@@ -67,9 +67,19 @@ private:
 	SpoutOut 						mSpoutOut;
 
 	// textures
-	SDATextureList					mTexs;
+	//SDATextureList					mTexs;
 	fs::path						mTexturesFilepath;
 	int								x, texIndex;
+	//! read a uniforms json file 
+	void							loadTextures(const ci::DataSourceRef &source);
+	void							floatFromJson(const ci::JsonTree &json);
+	void							sampler2dFromJson(const ci::JsonTree &json);
+	void							vec2FromJson(const ci::JsonTree &json);
+	void							vec3FromJson(const ci::JsonTree &json);
+	void							vec4FromJson(const ci::JsonTree &json);
+	void							intFromJson(const ci::JsonTree &json);
+	void							boolFromJson(const ci::JsonTree &json);
+	fs::path						mTexturesJson;
 
 	// animation
 	ci::Anim<float>					mScale;

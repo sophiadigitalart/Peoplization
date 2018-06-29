@@ -22,9 +22,9 @@ PeoplizationApp::PeoplizationApp()
 
 	// initialize 
 	mScale = 1.0f;
-	mDuration = 4.5f;
+	mDuration = 1.5f;
 	texIndex = 0;
-	mTexturesFilepath = getAssetPath("") / "textures.xml";
+	/*mTexturesFilepath = getAssetPath("") / "textures.xml";
 	if (fs::exists(mTexturesFilepath)) {
 		// load textures from file if one exists
 		mTexs = SDATexture::readSettings(mSDAAnimation, loadFile(mTexturesFilepath));
@@ -41,9 +41,37 @@ PeoplizationApp::PeoplizationApp()
 	else {
 		// otherwise create a texture from scratch
 		mTexs.push_back(TextureAudio::create(mSDAAnimation));
+	} */
+	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
+	if (fs::exists(mTexturesJson)) {
+		loadTextures(loadFile(mTexturesJson));
 	}
-	
+	else {
+		
+	}
 }
+void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
+
+	JsonTree json(source);
+
+	// try to load the specified json file
+	if (json.hasChild("textures")) {
+		JsonTree u(json.getChild("textures"));
+
+		// iterate warps
+		for (size_t i = 0; i < u.getNumChildren(); i++) {
+			JsonTree child(u.getChild(i));
+
+			if (child.hasChild("texture")) {
+				JsonTree w(child.getChild("texture"));
+				
+				int index = (w.hasChild("index")) ? w.getValueForKey<int>("index") : 0;
+				
+			}
+		}
+	}
+}
+
 void PeoplizationApp::positionRenderWindow() {
 	mSDASettings->mRenderPosXY = ivec2(mSDASettings->mRenderX, mSDASettings->mRenderY);
 	setWindowPos(mSDASettings->mRenderX, mSDASettings->mRenderY);
@@ -99,7 +127,7 @@ void PeoplizationApp::mouseDrag(MouseEvent event)
 {
 	if (!mSDASession->handleMouseDrag(event)) {
 		// let your application perform its mouseDrag handling here
-		mTexs[texIndex]->setSpeed((float)event.getX() / (float)getWindowWidth() / 10.0f);
+		//mTexs[texIndex]->setSpeed((float)event.getX() / (float)getWindowWidth() / 10.0f);
 	}	
 }
 void PeoplizationApp::mouseUp(MouseEvent event)
@@ -136,8 +164,7 @@ void PeoplizationApp::keyUp(KeyEvent event)
 	}
 }
 void PeoplizationApp::startAnimation() 
-{
-	
+{	
 	timeline().apply(&mScale, 2.0f, mDuration, EaseInOutQuad());
 	timeline().appendTo(&mScale, 1.0f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
@@ -151,13 +178,12 @@ void PeoplizationApp::draw()
 			timeline().apply(&mSDASettings->iAlpha, 0.0f, 1.0f, 1.5f, EaseInCubic());
 		}
 	}
-
 	gl::ScopedModelMatrix scpModel;
-	
-	gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
+	//gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
+	gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
 	gl::scale(mScale(), mScale());
 	
-	gl::draw(mTexs[texIndex]->getTexture());
+	/* gl::draw(mTexs[texIndex]->getTexture());
 
 	 
 	i = 0;
@@ -166,7 +192,7 @@ void PeoplizationApp::draw()
 		int x = 128 * i;
 		gl::draw(tex->getTexture(), Rectf(0 + x, 0, 128 + x, 128));
 		i++;
-	}
+	} */
 
 	// Spout Send
 	mSpoutOut.sendViewport();
