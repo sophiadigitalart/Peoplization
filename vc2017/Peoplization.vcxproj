@@ -131,6 +131,7 @@
     <Xml Include="Debug\SDASettings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\PeoplizationApp.h" />
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiConstants.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiExceptions.h" />
