@@ -21,6 +21,8 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
+	mScale = 1.0f;
+	mDuration = 4.5f;
 	texIndex = 0;
 	mTexturesFilepath = getAssetPath("") / "textures.xml";
 	if (fs::exists(mTexturesFilepath)) {
@@ -40,8 +42,6 @@ PeoplizationApp::PeoplizationApp()
 		// otherwise create a texture from scratch
 		mTexs.push_back(TextureAudio::create(mSDAAnimation));
 	}
-	mScale = 1.0f;
-
 	
 }
 void PeoplizationApp::positionRenderWindow() {
@@ -111,21 +111,17 @@ void PeoplizationApp::mouseUp(MouseEvent event)
 
 void PeoplizationApp::keyDown(KeyEvent event)
 {
-	startAnimation();
+	
 	if (!mSDASession->handleKeyDown(event)) {
 		switch (event.getCode()) {
 		case KeyEvent::KEY_ESCAPE:
 			// quit the application
 			quit();
 			break;
-		case KeyEvent::KEY_a:
-			texIndex++;
-			if (texIndex > mTexs.size() - 1) texIndex = 0;
+		case KeyEvent::KEY_q:
+			startAnimation();
 			break;
-		case KeyEvent::KEY_z:
-			texIndex--;
-			if (texIndex < 0) texIndex = mTexs.size() - 1;
-			break;
+		
 		case KeyEvent::KEY_h:
 			// mouse cursor and ui visibility
 			mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
@@ -141,9 +137,9 @@ void PeoplizationApp::keyUp(KeyEvent event)
 }
 void PeoplizationApp::startAnimation() 
 {
-	const float kDuration = 4.5f;
-	timeline().apply(&mScale, 2.0f, kDuration, EaseInOutQuad());
-	timeline().appendTo(&mScale, 1.0f, kDuration, EaseInOutQuad()).delay(1.0f);
+	
+	timeline().apply(&mScale, 2.0f, mDuration, EaseInOutQuad());
+	timeline().appendTo(&mScale, 1.0f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
 void PeoplizationApp::draw()
 {
@@ -163,14 +159,14 @@ void PeoplizationApp::draw()
 	
 	gl::draw(mTexs[texIndex]->getTexture());
 
-	/* 
+	 
 	i = 0;
 	for (auto tex : mTexs)
 	{
 		int x = 128 * i;
 		gl::draw(tex->getTexture(), Rectf(0 + x, 0, 128 + x, 128));
 		i++;
-	} */
+	}
 
 	// Spout Send
 	mSpoutOut.sendViewport();

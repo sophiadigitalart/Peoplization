@@ -73,4 +73,5 @@ private:
 
 	// animation
 	ci::Anim<float>					mScale;
+	float							mDuration;
 };
