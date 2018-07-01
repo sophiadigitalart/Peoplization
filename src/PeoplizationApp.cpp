@@ -21,17 +21,16 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
-	mScale = 0.01f;
+	mPingScale = 0.01f;
 	mDuration = 1.5f;
-	texIndex = 0;
+	pingTexIndex = 0;
+	pongTexIndex = 1;
 	
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
 		mPingStart = vec2(0.5f);
-		mPingEnd = vec2(0.7f);
-		mPongStart = vec2(0.5f);
-		mPongEnd = vec2(0.3f);
+		
 	}
 	else {
 		quit();
@@ -71,18 +70,12 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
+			mTex.mPosEnd = vec2(0.09f, 0.03f);
 			mTexs.push_back(mTex);
 		}
 	}
 }
-void PeoplizationApp::startAnimation()
-{
-	timeline().apply(&mScale, 1.0f, mDuration, EaseInOutQuad())
-		.finishFn(incrementTextureIndex);
-	timeline().apply(&mPingStart, 1.0f, mDuration, EaseInOutQuad())
-		.finishFn(incrementTextureIndex);
-	timeline().appendTo(&mScale, 0.1f, mDuration, EaseInOutQuad()).delay(1.0f);
-}
+
 
 void PeoplizationApp::positionRenderWindow() {
 	mSDASettings->mRenderPosXY = ivec2(mSDASettings->mRenderX, mSDASettings->mRenderY);
@@ -170,15 +163,26 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		}
 	}
 }
-void incrementTextureIndex()
-{
-	texIndex++;
-	
-}
 void PeoplizationApp::keyUp(KeyEvent event)
 {
 	if (!mSDASession->handleKeyUp(event)) {
 	}
+}
+void nextPingTexture()
+{
+	pingTexIndex++;
+	mPingScale = 0.01f;
+}
+void nextPongTexture()
+{
+	pongTexIndex++;
+}
+void PeoplizationApp::startAnimation()
+{
+	timeline().apply(&mPingScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
+	timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	//.finishFn(incrementTextureIndex);
+	//timeline().appendTo(&mScale, 0.1f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
 void PeoplizationApp::draw()
 {
@@ -191,13 +195,15 @@ void PeoplizationApp::draw()
 		}
 	}
 	gl::ScopedModelMatrix scpModel;
-	gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
-	//gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
-	gl::scale(mScale(), mScale());
-	if (texIndex > mTexs.size() - 1) texIndex = 0;
-	gl::draw(mTexs[texIndex].mTexture);
-	gl::translate(0.1f * mSDASettings->mRenderWidth, 0.1f * mSDASettings->mRenderHeight);
-	gl::draw(mTexs[2].mTexture);
+	gl::translate(mPingStart().x * mSDASettings->mRenderWidth, mPingStart().y * mSDASettings->mRenderHeight);
+	gl::scale(mPingScale(), mPingScale());
+	if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
+	gl::draw(mTexs[pingTexIndex].mTexture);
+
+	if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
+	gl::draw(mTexs[pongTexIndex].mTexture);
+	gl::translate(mPongStart().x * mSDASettings->mRenderWidth, mPongStart().y * mSDASettings->mRenderHeight);
+	gl::draw(mTexs[pongTexIndex].mTexture);
 
 	/*
 	i = 0;

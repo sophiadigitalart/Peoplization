@@ -21,10 +21,10 @@ using namespace ci::app;
 using namespace std;
 using namespace SophiaDigitalArt;
 
-int	texIndex;
+int									pingTexIndex, pongTexIndex;
+ci::Anim<float>						mPingScale, mPongScale;
 struct Tex {
-
-	Anim<vec2>						mPos;
+	vec2							mPosEnd;
 	ci::gl::TextureRef				mTexture;
 };
 class PeoplizationApp : public App {
@@ -82,6 +82,8 @@ private:
 	void							textureFromJson(const ci::JsonTree &json);
 
 	// animation
-	ci::Anim<float>					mScale;
+	
+	ci::Anim<vec2>					mPingStart;
+	ci::Anim<vec2>					mPongStart;
 	float							mDuration;
 };
