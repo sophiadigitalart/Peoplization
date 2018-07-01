@@ -22,7 +22,11 @@ using namespace std;
 using namespace SophiaDigitalArt;
 
 int	texIndex;
+struct Tex {
 
+	Anim<vec2>						mPos;
+	ci::gl::TextureRef				mTexture;
+};
 class PeoplizationApp : public App {
 
 public:
@@ -69,7 +73,7 @@ private:
 	SpoutOut 						mSpoutOut;
 
 	// textures
-	vector<ci::gl::TextureRef>		mTexs;
+	vector<Tex>						mTexs;
 	fs::path						mTexturesFilepath;
 	
 	//! read a uniforms json file 

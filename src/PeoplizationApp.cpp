@@ -24,30 +24,17 @@ PeoplizationApp::PeoplizationApp()
 	mScale = 0.01f;
 	mDuration = 1.5f;
 	texIndex = 0;
-	/*mTexturesFilepath = getAssetPath("") / "textures.xml";
-	if (fs::exists(mTexturesFilepath)) {
-		// load textures from file if one exists
-		mTexs = SDATexture::readSettings(mSDAAnimation, loadFile(mTexturesFilepath));
-		i = 0;
-		for (auto tex : mTexs)
-		{
-			if (tex->getType() == SDATexture::SEQUENCE) {
-				texIndex = i;
-				mTexs[texIndex]->setSpeed(0.02f);
-			}
-			i++;
-		}
-	}
-	else {
-		// otherwise create a texture from scratch
-		mTexs.push_back(TextureAudio::create(mSDAAnimation));
-	} */
+	
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
+		mPingStart = vec2(0.5f);
+		mPingEnd = vec2(0.7f);
+		mPongStart = vec2(0.5f);
+		mPongEnd = vec2(0.3f);
 	}
 	else {
-		
+		quit();
 	}
 }
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
@@ -58,14 +45,12 @@ void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
 	if (json.hasChild("textures")) {
 		JsonTree u(json.getChild("textures"));
 
-		// iterate warps
+		// iterate textures
 		for (size_t i = 0; i < u.getNumChildren(); i++) {
 			JsonTree child(u.getChild(i));
 
 			if (child.hasChild("texture")) {
 				JsonTree w(child.getChild("texture"));
-				
-				//int index = (w.hasChild("index")) ? w.getValueForKey<int>("index") : 0;
 				textureFromJson(child);
 			}
 		}
@@ -84,11 +69,21 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		jMax = (u.hasChild("max")) ? u.getValueForKey<float>("max") : 1.0f;
 		fs::path fullPath = getAssetPath("") / "sequence" / jName;
 		if (fs::exists(fullPath)) {
-			mTexs.push_back(ci::gl::Texture::create(ci::loadImage(fullPath), ci::gl::Texture::Format().loadTopDown(false)));
+			Tex mTex;
+			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
+			mTexs.push_back(mTex);
 		}
-
 	}
 }
+void PeoplizationApp::startAnimation()
+{
+	timeline().apply(&mScale, 1.0f, mDuration, EaseInOutQuad())
+		.finishFn(incrementTextureIndex);
+	timeline().apply(&mPingStart, 1.0f, mDuration, EaseInOutQuad())
+		.finishFn(incrementTextureIndex);
+	timeline().appendTo(&mScale, 0.1f, mDuration, EaseInOutQuad()).delay(1.0f);
+}
+
 void PeoplizationApp::positionRenderWindow() {
 	mSDASettings->mRenderPosXY = ivec2(mSDASettings->mRenderX, mSDASettings->mRenderY);
 	setWindowPos(mSDASettings->mRenderX, mSDASettings->mRenderY);
@@ -185,12 +180,6 @@ void PeoplizationApp::keyUp(KeyEvent event)
 	if (!mSDASession->handleKeyUp(event)) {
 	}
 }
-void PeoplizationApp::startAnimation()
-{	
-	timeline().apply(&mScale, 2.0f, mDuration, EaseInOutQuad())
-		.finishFn(incrementTextureIndex);
-	timeline().appendTo(&mScale, 1.0f, mDuration, EaseInOutQuad()).delay(1.0f);
-}
 void PeoplizationApp::draw()
 {
 	gl::clear(Color::black());
@@ -206,7 +195,9 @@ void PeoplizationApp::draw()
 	//gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
 	gl::scale(mScale(), mScale());
 	if (texIndex > mTexs.size() - 1) texIndex = 0;
-	gl::draw(mTexs[texIndex]);
+	gl::draw(mTexs[texIndex].mTexture);
+	gl::translate(0.1f * mSDASettings->mRenderWidth, 0.1f * mSDASettings->mRenderHeight);
+	gl::draw(mTexs[2].mTexture);
 
 	/*
 	i = 0;
