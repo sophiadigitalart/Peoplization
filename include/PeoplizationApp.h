@@ -21,6 +21,8 @@ using namespace ci::app;
 using namespace std;
 using namespace SophiaDigitalArt;
 
+int	texIndex;
+
 class PeoplizationApp : public App {
 
 public:
@@ -69,7 +71,7 @@ private:
 	// textures
 	vector<ci::gl::TextureRef>		mTexs;
 	fs::path						mTexturesFilepath;
-	int								x, texIndex;
+	
 	//! read a uniforms json file 
 	void							loadTextures(const ci::DataSourceRef &source);
 	fs::path						mTexturesJson;

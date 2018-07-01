@@ -21,7 +21,7 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
-	mScale = 1.0f;
+	mScale = 0.01f;
 	mDuration = 1.5f;
 	texIndex = 0;
 	/*mTexturesFilepath = getAssetPath("") / "textures.xml";
@@ -163,10 +163,6 @@ void PeoplizationApp::keyDown(KeyEvent event)
 			// quit the application
 			quit();
 			break;
-		case KeyEvent::KEY_n:
-			texIndex++;
-			if (texIndex > mTexs.size() - 1) texIndex = 0;
-			break;
 		case KeyEvent::KEY_q:
 			startAnimation();
 			break;
@@ -179,14 +175,20 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		}
 	}
 }
+void incrementTextureIndex()
+{
+	texIndex++;
+	
+}
 void PeoplizationApp::keyUp(KeyEvent event)
 {
 	if (!mSDASession->handleKeyUp(event)) {
 	}
 }
-void PeoplizationApp::startAnimation() 
+void PeoplizationApp::startAnimation()
 {	
-	timeline().apply(&mScale, 2.0f, mDuration, EaseInOutQuad());
+	timeline().apply(&mScale, 2.0f, mDuration, EaseInOutQuad())
+		.finishFn(incrementTextureIndex);
 	timeline().appendTo(&mScale, 1.0f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
 void PeoplizationApp::draw()
@@ -203,17 +205,17 @@ void PeoplizationApp::draw()
 	gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
 	//gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
 	gl::scale(mScale(), mScale());
-	
+	if (texIndex > mTexs.size() - 1) texIndex = 0;
 	gl::draw(mTexs[texIndex]);
 
-	
+	/*
 	i = 0;
 	for (auto tex : mTexs)
 	{
 		int x = 128 * i;
 		gl::draw(tex, Rectf(0 + x, 0, 128 + x, 128));
 		i++;
-	} 
+	} */
 
 	// Spout Send
 	mSpoutOut.sendViewport();
