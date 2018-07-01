@@ -22,11 +22,19 @@ using namespace std;
 using namespace SophiaDigitalArt;
 
 int									pingTexIndex, pongTexIndex;
+
+// animation
 ci::Anim<float>						mPingScale, mPongScale;
+ci::Anim<vec2>						mPingStart;
+ci::Anim<vec2>						mPongStart;
+float								mDuration;
+
 struct Tex {
 	vec2							mPosEnd;
 	ci::gl::TextureRef				mTexture;
 };
+vector<Tex>							mTexs;
+
 class PeoplizationApp : public App {
 
 public:
@@ -58,9 +66,9 @@ private:
 	int								playheadPositions[12];
 	int								speeds[12];
 
-	float							f = 0.0f;
+	/*float							f = 0.0f;
 	char							buf[64];
-	unsigned int					i, j;
+	unsigned int					i, j;*/
 
 	bool							mouseGlobal;
 
@@ -73,17 +81,11 @@ private:
 	SpoutOut 						mSpoutOut;
 
 	// textures
-	vector<Tex>						mTexs;
 	fs::path						mTexturesFilepath;
 	
-	//! read a uniforms json file 
+	//! read a textures json file 
 	void							loadTextures(const ci::DataSourceRef &source);
 	fs::path						mTexturesJson;
 	void							textureFromJson(const ci::JsonTree &json);
 
-	// animation
-	
-	ci::Anim<vec2>					mPingStart;
-	ci::Anim<vec2>					mPongStart;
-	float							mDuration;
 };

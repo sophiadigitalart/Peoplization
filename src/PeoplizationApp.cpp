@@ -29,8 +29,7 @@ PeoplizationApp::PeoplizationApp()
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
-		mPingStart = vec2(0.5f);
-		
+		mPingStart = vec2(0.5f);		
 	}
 	else {
 		quit();
@@ -172,10 +171,15 @@ void nextPingTexture()
 {
 	pingTexIndex++;
 	mPingScale = 0.01f;
+	mPingStart = vec2(0.5f);
+	timeline().apply(&mPongScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
+	timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseInOutQuad());
 }
 void nextPongTexture()
 {
 	pongTexIndex++;
+	mPongScale = 0.01f;
+	mPongStart = vec2(0.5f);
 }
 void PeoplizationApp::startAnimation()
 {
@@ -200,9 +204,9 @@ void PeoplizationApp::draw()
 	if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
 	gl::draw(mTexs[pingTexIndex].mTexture);
 
-	if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
-	gl::draw(mTexs[pongTexIndex].mTexture);
 	gl::translate(mPongStart().x * mSDASettings->mRenderWidth, mPongStart().y * mSDASettings->mRenderHeight);
+	gl::scale(mPongScale(), mPongScale());
+	if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
 	gl::draw(mTexs[pongTexIndex].mTexture);
 
 	/*
