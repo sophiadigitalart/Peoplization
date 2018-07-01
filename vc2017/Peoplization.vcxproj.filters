@@ -13,43 +13,37 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
     <Filter Include="Blocks">
-      <UniqueIdentifier>{F354AB1F-CD86-4395-B755-E61A71F2F5CF}</UniqueIdentifier>
+      <UniqueIdentifier>{D9C884D4-A17B-499A-8025-D4A7E1F3A756}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Midi2">
-      <UniqueIdentifier>{7EF11F4E-27B5-4DD4-9B67-511B89C786B4}</UniqueIdentifier>
+      <UniqueIdentifier>{9428AD3C-1960-44C4-B658-B7F374924061}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Midi2\include">
-      <UniqueIdentifier>{211240A1-8319-46F4-B025-8F1516636CBF}</UniqueIdentifier>
+      <UniqueIdentifier>{9BB504D2-5623-4D87-B12E-16A98230DE32}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Midi2\lib">
-      <UniqueIdentifier>{FBE58CD7-1E81-4B11-8FEB-6420E0381C3F}</UniqueIdentifier>
+      <UniqueIdentifier>{F13A1945-A4BF-4E69-8C36-F0D70A0CB0D3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Midi2\src">
-      <UniqueIdentifier>{B0C6AD72-8EC1-4810-A9CB-D425CFF25C5A}</UniqueIdentifier>
+      <UniqueIdentifier>{BF73F8E4-8139-460F-93FC-7C74F5711BA7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-SDA">
-      <UniqueIdentifier>{E19A9FF3-7D5B-4D4D-82F2-DEA0F0AC4445}</UniqueIdentifier>
+      <UniqueIdentifier>{7981F311-A1C3-4D9E-90F4-9B7A19FDF148}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-SDA\include">
-      <UniqueIdentifier>{A324DC4D-E7DB-4195-8485-83250B365CBD}</UniqueIdentifier>
+      <UniqueIdentifier>{0BBAAA9E-8EDA-4E1A-AF58-2DD00ECDDC91}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-SDA\src">
-      <UniqueIdentifier>{6421B343-28A0-4597-B41A-370F69923655}</UniqueIdentifier>
+      <UniqueIdentifier>{DC6656D6-47B6-4DBD-9D4C-024B886C8CEF}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-WebSocketPP">
-      <UniqueIdentifier>{AE1C5B33-1C0D-49C3-AEA4-3BBC4B301839}</UniqueIdentifier>
+      <UniqueIdentifier>{644E573F-DE7D-48A0-ABCC-59CB0A4508D0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-WebSocketPP\src">
-      <UniqueIdentifier>{F3BBC42B-9AAB-4E3A-8AED-DF8E407D4D2C}</UniqueIdentifier>
+      <UniqueIdentifier>{DDDCB898-19E4-4739-BBF9-20AE2A39F48B}</UniqueIdentifier>
     </Filter>
     <Filter Include="assets">
-      <UniqueIdentifier>{64e775ba-460c-4430-bc11-dda410e08b67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="assets\sequence">
-      <UniqueIdentifier>{da73d89d-f324-4d38-a28e-0e3752438232}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="debug">
-      <UniqueIdentifier>{e631c0ed-64d1-47ec-b086-0ad3c5e15745}</UniqueIdentifier>
+      <UniqueIdentifier>{407e0a4a-6b7f-46ff-86d0-6e88894e5421}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +227,9 @@
     <None Include="..\assets\shadertoy.inc">
       <Filter>assets</Filter>
     </None>
+    <None Include="..\assets\textures.json">
+      <Filter>assets</Filter>
+    </None>
     <None Include="..\assets\uniforms.json">
       <Filter>assets</Filter>
     </None>
@@ -246,9 +243,6 @@
     </Xml>
     <Xml Include="..\assets\textures.xml">
       <Filter>assets</Filter>
-    </Xml>
-    <Xml Include="Debug\SDASettings.xml">
-      <Filter>debug</Filter>
     </Xml>
   </ItemGroup>
 </Project>

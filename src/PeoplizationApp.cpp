@@ -65,13 +65,30 @@ void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
 			if (child.hasChild("texture")) {
 				JsonTree w(child.getChild("texture"));
 				
-				int index = (w.hasChild("index")) ? w.getValueForKey<int>("index") : 0;
-				
+				//int index = (w.hasChild("index")) ? w.getValueForKey<int>("index") : 0;
+				textureFromJson(child);
 			}
 		}
 	}
 }
+void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
+	string jName;
+	int jCtrlIndex;
+	float jValue, jMin, jMax;
+	if (json.hasChild("texture")) {
+		JsonTree u(json.getChild("texture"));
+		jName = (u.hasChild("name")) ? u.getValueForKey<string>("name") : "unknown";
+		jCtrlIndex = (u.hasChild("index")) ? u.getValueForKey<int>("index") : 249;
+		jValue = (u.hasChild("value")) ? u.getValueForKey<float>("value") : 0.01f;
+		jMin = (u.hasChild("min")) ? u.getValueForKey<float>("min") : 0.0f;
+		jMax = (u.hasChild("max")) ? u.getValueForKey<float>("max") : 1.0f;
+		fs::path fullPath = getAssetPath("") / "sequence" / jName;
+		if (fs::exists(fullPath)) {
+			mTexs.push_back(ci::gl::Texture::create(ci::loadImage(fullPath), ci::gl::Texture::Format().loadTopDown(false)));
+		}
 
+	}
+}
 void PeoplizationApp::positionRenderWindow() {
 	mSDASettings->mRenderPosXY = ivec2(mSDASettings->mRenderX, mSDASettings->mRenderY);
 	setWindowPos(mSDASettings->mRenderX, mSDASettings->mRenderY);
@@ -146,10 +163,14 @@ void PeoplizationApp::keyDown(KeyEvent event)
 			// quit the application
 			quit();
 			break;
+		case KeyEvent::KEY_n:
+			texIndex++;
+			if (texIndex > mTexs.size() - 1) texIndex = 0;
+			break;
 		case KeyEvent::KEY_q:
 			startAnimation();
 			break;
-		
+
 		case KeyEvent::KEY_h:
 			// mouse cursor and ui visibility
 			mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
@@ -179,20 +200,20 @@ void PeoplizationApp::draw()
 		}
 	}
 	gl::ScopedModelMatrix scpModel;
-	//gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
-	gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
+	gl::translate(0.5f * mSDASettings->mRenderWidth, 0.5f * mSDASettings->mRenderHeight);
+	//gl::translate(mScale() * mSDASettings->mRenderWidth, mScale() * mSDASettings->mRenderHeight);
 	gl::scale(mScale(), mScale());
 	
-	/* gl::draw(mTexs[texIndex]->getTexture());
+	gl::draw(mTexs[texIndex]);
 
-	 
+	
 	i = 0;
 	for (auto tex : mTexs)
 	{
 		int x = 128 * i;
-		gl::draw(tex->getTexture(), Rectf(0 + x, 0, 128 + x, 128));
+		gl::draw(tex, Rectf(0 + x, 0, 128 + x, 128));
 		i++;
-	} */
+	} 
 
 	// Spout Send
 	mSpoutOut.sendViewport();
