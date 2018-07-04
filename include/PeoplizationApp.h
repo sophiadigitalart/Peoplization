@@ -28,6 +28,7 @@ ci::Anim<float>						mPingScale, mPongScale;
 ci::Anim<vec2>						mPingStart;
 ci::Anim<vec2>						mPongStart;
 float								mDuration;
+bool								mPingPong;
 
 struct Tex {
 	vec2							mPosEnd;
@@ -66,9 +67,9 @@ private:
 	int								playheadPositions[12];
 	int								speeds[12];
 
-	/*float							f = 0.0f;
-	char							buf[64];
-	unsigned int					i, j;*/
+	double							currentTime;
+	/*void							nextPingTexture();
+	void							nextPongTexture();*/
 
 	bool							mouseGlobal;
 

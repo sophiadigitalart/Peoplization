@@ -25,6 +25,8 @@ PeoplizationApp::PeoplizationApp()
 	mDuration = 1.5f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
+	mPingPong = false;
+	currentTime = 2.0f;
 	
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
 	if (fs::exists(mTexturesJson)) {
@@ -100,6 +102,13 @@ void PeoplizationApp::update()
 {
 	mSDASession->setFloatUniformValueByIndex(mSDASettings->IFPS, getAverageFps());
 	mSDASession->update();
+	if (getElapsedSeconds() - currentTime > 2.0f) {
+		CI_LOG_I("pingpong");
+		currentTime = getElapsedSeconds();
+		mPingPong = !mPingPong;
+		startAnimation();
+		
+	}
 }
 void PeoplizationApp::cleanup()
 {
@@ -169,22 +178,32 @@ void PeoplizationApp::keyUp(KeyEvent event)
 }
 void nextPingTexture()
 {
-	pingTexIndex++;
+	CI_LOG_I("nextPingTexture");
+	pingTexIndex += 2;
 	mPingScale = 0.01f;
 	mPingStart = vec2(0.5f);
-	timeline().apply(&mPongScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
-	timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	//timeline().apply(&mPongScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
+	//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseInOutQuad());
 }
 void nextPongTexture()
 {
-	pongTexIndex++;
+	CI_LOG_I("nextPongTexture");
+	pongTexIndex += 2;
 	mPongScale = 0.01f;
 	mPongStart = vec2(0.5f);
 }
 void PeoplizationApp::startAnimation()
 {
-	timeline().apply(&mPingScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
-	timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	if (mPingPong) {
+		timeline().apply(&mPingScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
+		timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	}
+	else {
+		timeline().apply(&mPongScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPongTexture);
+		timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	}
+	//timeline().apply(&mPingScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
+	//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
 	//.finishFn(incrementTextureIndex);
 	//timeline().appendTo(&mScale, 0.1f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
