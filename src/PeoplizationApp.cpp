@@ -9,7 +9,7 @@ PeoplizationApp::PeoplizationApp()
 	mSDASession = SDASession::create(mSDASettings);
 	// Animation
 	mSDAAnimation = SDAAnimation::create(mSDASettings);
-	
+
 	setUIVisibility(mSDASettings->mCursorVisible);
 	mSDASession->getWindowsResolution();
 
@@ -22,20 +22,31 @@ PeoplizationApp::PeoplizationApp()
 
 	// initialize 
 	mPingScale = 0.01f;
-	mDuration = 1.5f;
+	mPongScale = 0.01f;
+	mDuration = 2.5f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
 	mPingPong = false;
 	currentTime = 2.0f;
-	
+	mScaleMax = 2.0f;
+	delta = 0.01f;
+
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
-		mPingStart = vec2(0.5f);		
+		mPingStart = vec2(0.5f);
+		mPongStart = vec2(0.5f);
 	}
 	else {
 		quit();
 	}
+	mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
+	mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
+	mParams->addParam("currentTime", &currentTime).min(0.1f).max(20.5f).keyIncr("q").keyDecr("Q").precision(2).step(0.2f);
+	mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
+	mParams->addParam("mPingPong", &mPingPong);
+	mParams->addParam("delta", &delta);
+
 }
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
 
@@ -121,7 +132,7 @@ void PeoplizationApp::mouseDown(MouseEvent event)
 {
 	if (!mSDASession->handleMouseDown(event)) {
 		// let your application perform its mouseDown handling here
-		if (event.isRightDown()) { 
+		if (event.isRightDown()) {
 		}
 	}
 }
@@ -130,7 +141,7 @@ void PeoplizationApp::mouseDrag(MouseEvent event)
 	if (!mSDASession->handleMouseDrag(event)) {
 		// let your application perform its mouseDrag handling here
 		//mTexs[texIndex]->setSpeed((float)event.getX() / (float)getWindowWidth() / 10.0f);
-	}	
+	}
 }
 void PeoplizationApp::mouseUp(MouseEvent event)
 {
@@ -141,7 +152,7 @@ void PeoplizationApp::mouseUp(MouseEvent event)
 
 void PeoplizationApp::keyDown(KeyEvent event)
 {
-	
+
 	if (!mSDASession->handleKeyDown(event)) {
 		switch (event.getCode()) {
 		case KeyEvent::KEY_ESCAPE:
@@ -149,7 +160,7 @@ void PeoplizationApp::keyDown(KeyEvent event)
 			quit();
 			break;
 		case KeyEvent::KEY_q:
-			startAnimation();
+			//startAnimation();
 			break;
 
 		case KeyEvent::KEY_h:
@@ -179,34 +190,32 @@ void nextPongTexture()
 	mPongScale = 0.01f;
 	mPongStart = vec2(0.5f);
 }
+
+void PeoplizationApp::startAnimation()
+{
+	CI_LOG_I("ping startAnimation");
+	timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+	timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
+	timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+	CI_LOG_I("pong startAnimation");
+	timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+	timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+	
+}
 void PeoplizationApp::update()
 {
 	mSDASession->setFloatUniformValueByIndex(mSDASettings->IFPS, getAverageFps());
 	mSDASession->update();
-	if (getElapsedSeconds() - currentTime > 6.0f) {
-		CI_LOG_I("pingpong");
+	delta = getElapsedSeconds() - currentTime;
+	if (delta > mDuration) { // 6.0f) {
+		CI_LOG_I("ping");
 		currentTime = getElapsedSeconds();
 		mPingPong = !mPingPong;
 		startAnimation();
-
 	}
-}
-void PeoplizationApp::startAnimation()
-{
-	if (mPingPong) {
-		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, 12.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
-		timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
+	if (delta > mDuration * 2.0f) {
+		
 	}
-	else {
-		CI_LOG_I("pong startAnimation");
-		timeline().apply(&mPongScale, 12.0f, mDuration, EaseInOutQuad()).finishFn(nextPongTexture);
-		timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseInOutQuad());
-	}
-	//timeline().apply(&mPingScale, 2.0f, mDuration, EaseInOutQuad()).finishFn(nextPingTexture);
-	//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseInOutQuad());
-	//.finishFn(incrementTextureIndex);
-	//timeline().appendTo(&mScale, 0.1f, mDuration, EaseInOutQuad()).delay(1.0f);
 }
 void PeoplizationApp::draw()
 {
@@ -240,6 +249,8 @@ void PeoplizationApp::draw()
 
 	// Spout Send
 	mSpoutOut.sendViewport();
+	// Draw the interface
+	mParams->draw();
 	getWindow()->setTitle(mSDASettings->sFps + " fps SDA");
 }
 

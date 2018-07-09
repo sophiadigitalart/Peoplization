@@ -2,6 +2,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/params/Params.h"
 
 // Settings
 #include "SDASettings.h"
@@ -61,15 +62,11 @@ private:
 	SDALogRef						mSDALog;
 	// Animation
 	SDAAnimationRef					mSDAAnimation;
-	// imgui
-	float							color[4];
-	float							backcolor[4];
-	int								playheadPositions[12];
-	int								speeds[12];
+	
+	float							mScaleMax;
 
 	double							currentTime;
-	/*void							nextPingTexture();
-	void							nextPongTexture();*/
+	double							delta;
 
 	bool							mouseGlobal;
 
@@ -89,4 +86,6 @@ private:
 	fs::path						mTexturesJson;
 	void							textureFromJson(const ci::JsonTree &json);
 
+	// ui
+	params::InterfaceGlRef			mParams;
 };
