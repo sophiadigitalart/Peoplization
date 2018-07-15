@@ -88,6 +88,7 @@ private:
 
 	//! shaders
 	gl::GlslProgRef					mGlslBlend;
+	int								iBlendmode;
 
 	void drawContent();
 	// ui

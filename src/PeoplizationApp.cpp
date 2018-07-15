@@ -31,7 +31,7 @@ PeoplizationApp::PeoplizationApp()
 	mScaleMax = 2.0f;
 	delta = 0.01f;
 
-	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "textures.json";
+	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
 		mPingStart = vec2(0.5f);
@@ -41,7 +41,7 @@ PeoplizationApp::PeoplizationApp()
 		quit();
 	}
 	
-	
+	iBlendmode = 8;
 	//mGlslBlend = gl::GlslProg::create(mDefaultVextexShaderString, mMixFragmentShaderString);
 	mGlslBlend = gl::GlslProg::create(gl::GlslProg::Format().vertex(loadAsset("passthrough.vs"))
 		.fragment(loadAsset("mixtextures.glsl")));
@@ -52,6 +52,7 @@ PeoplizationApp::PeoplizationApp()
 	mParams->addParam("currentTime", &currentTime).min(0.1f).max(20.5f).keyIncr("q").keyDecr("Q").precision(2).step(0.2f);
 	mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
 	mParams->addParam("mPingPong", &mPingPong);
+	mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
 	mParams->addParam("delta", &delta);
 	
 }
@@ -86,7 +87,7 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		jValue = (u.hasChild("value")) ? u.getValueForKey<float>("value") : 0.01f;
 		jMin = (u.hasChild("min")) ? u.getValueForKey<float>("min") : 0.0f;
 		jMax = (u.hasChild("max")) ? u.getValueForKey<float>("max") : 1.0f;
-		fs::path fullPath = getAssetPath("") / "png24" / jName;
+		fs::path fullPath = getAssetPath("") / "sequence" / jName;
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
@@ -138,6 +139,8 @@ void PeoplizationApp::mouseMove(MouseEvent event)
 }
 void PeoplizationApp::mouseDown(MouseEvent event)
 {
+	iBlendmode++;
+	if (iBlendmode > 26) iBlendmode = 0;
 	if (!mSDASession->handleMouseDown(event)) {
 		// let your application perform its mouseDown handling here
 		if (event.isRightDown()) {
@@ -238,15 +241,17 @@ void PeoplizationApp::drawContent()
 	gl::ScopedBlendPremult blend;
 
 	mGlslBlend->uniform("iGlobalTime", (float)getElapsedSeconds());
-	//mGlslBlend->uniform("iResolution", vec3(640.0, 480.0, 1.0));
-	
-	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
+	mGlslBlend->uniform("iZoom0", mPingScale);
+	mGlslBlend->uniform("iZoom1", mPongScale);
+
+	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 
 	mGlslBlend->uniform("iMouse", vec3(mSDAAnimation->getFloatUniformValueByIndex(35), mSDAAnimation->getFloatUniformValueByIndex(36), mSDAAnimation->getFloatUniformValueByIndex(37)));
 
 	mGlslBlend->uniform("iChannel0", 0); // texture 0
 	mGlslBlend->uniform("iChannel1", 1); // texture 1
+	mGlslBlend->uniform("iBlendmode", iBlendmode); // texture 0
 
 
 	gl::drawSolidRect(getWindowBounds());
