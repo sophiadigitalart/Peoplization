@@ -5,7 +5,7 @@
             "index" : 0,
             "max" : 1,
             "min" : 0,
-            "name" : "p0001.png",
+            "name" : "p0001.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -15,7 +15,7 @@
             "index" : 1,
             "max" : 1,
             "min" : 0,
-            "name" : "p0002.png",
+            "name" : "p0002.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -25,7 +25,7 @@
             "index" : 2,
             "max" : 1,
             "min" : 0,
-            "name" : "p0003.png",
+            "name" : "p0003.jpg",
             "type" : 0,
             "value" : 0.29999999999999999
          }
@@ -35,7 +35,7 @@
             "index" : 3,
             "max" : 1,
             "min" : 0,
-            "name" : "p0004.png",
+            "name" : "p0004.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -45,7 +45,7 @@
             "index" : 4,
             "max" : 1,
             "min" : 0,
-            "name" : "p0005.png",
+            "name" : "p0005.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -55,7 +55,7 @@
             "index" : 5,
             "max" : 3,
             "min" : 0,
-            "name" : "p0006.png",
+            "name" : "p0006.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -65,7 +65,7 @@
             "index" : 6,
             "max" : 3,
             "min" : 0,
-            "name" : "p0007.png",
+            "name" : "p0007.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -75,7 +75,7 @@
             "index" : 7,
             "max" : 3,
             "min" : 0,
-            "name" : "p0008.png",
+            "name" : "p0008.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -85,7 +85,7 @@
             "index" : 8,
             "max" : 5,
             "min" : 0,
-            "name" : "p0009.png",
+            "name" : "p0009.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -95,7 +95,7 @@
             "index" : 9,
             "max" : 2,
             "min" : -2,
-            "name" : "p0010.png",
+            "name" : "p0010.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -105,7 +105,7 @@
             "index" : 10,
             "max" : 128,
             "min" : 1,
-            "name" : "p0011.png",
+            "name" : "p0011.jpg",
             "type" : 0,
             "value" : 16
          }
@@ -115,7 +115,7 @@
             "index" : 11,
             "max" : 20,
             "min" : 9.9999999999999994e-12,
-            "name" : "p0012.png",
+            "name" : "p0012.jpg",
             "type" : 0,
             "value" : 20
          }
@@ -125,7 +125,7 @@
             "index" : 12,
             "max" : 3,
             "min" : -3,
-            "name" : "p0013.png",
+            "name" : "p0013.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -135,7 +135,7 @@
             "index" : 13,
             "max" : 12,
             "min" : 0.01,
-            "name" : "p0014.png",
+            "name" : "p0014.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -145,7 +145,7 @@
             "index" : 14,
             "max" : 3,
             "min" : 0,
-            "name" : "p0015.png",
+            "name" : "p0015.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -155,7 +155,7 @@
             "index" : 15,
             "max" : 1,
             "min" : 0.01,
-            "name" : "p0016.png",
+            "name" : "p0016.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -165,7 +165,7 @@
             "index" : 16,
             "max" : 1,
             "min" : 0,
-            "name" : "p0017.png",
+            "name" : "p0017.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -175,7 +175,7 @@
             "index" : 17,
             "max" : 1,
             "min" : 1.0000000000000001e-09,
-            "name" : "p0018.png",
+            "name" : "p0018.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -185,7 +185,7 @@
             "index" : 18,
             "max" : 1,
             "min" : 0,
-            "name" : "p0019.png",
+            "name" : "p0019.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -195,7 +195,7 @@
             "index" : 19,
             "max" : 1,
             "min" : 0,
-            "name" : "p0020.png",
+            "name" : "p0020.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
          }
@@ -205,7 +205,7 @@
             "index" : 20,
             "max" : 1,
             "min" : 0,
-            "name" : "p0021.png",
+            "name" : "p0021.jpg",
             "type" : 0,
             "value" : 0.5
          }
@@ -215,7 +215,7 @@
             "index" : 21,
             "max" : 1,
             "min" : 0,
-            "name" : "p0022.png",
+            "name" : "p0022.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
          }
@@ -225,7 +225,7 @@
             "index" : 22,
             "max" : 12,
             "min" : 0.01,
-            "name" : "p0023.png",
+            "name" : "p0023.jpg",
             "type" : 0,
             "value" : 12
          }
@@ -235,7 +235,7 @@
             "index" : 23,
             "max" : 1,
             "min" : 0,
-            "name" : "p0024.png",
+            "name" : "p0024.jpg",
             "type" : 0,
             "value" : 0.20000000000000001
          }
@@ -245,7 +245,7 @@
             "index" : 24,
             "max" : 1,
             "min" : 0,
-            "name" : "p0025.png",
+            "name" : "p0025.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
          }
@@ -255,7 +255,7 @@
             "index" : 25,
             "max" : 500,
             "min" : 0,
-            "name" : "p0026.png",
+            "name" : "p0026.jpg",
             "type" : 0,
             "value" : 60
          }
@@ -265,7 +265,7 @@
             "index" : 26,
             "max" : 0.5,
             "min" : 0,
-            "name" : "p0027.png",
+            "name" : "p0027.jpg",
             "type" : 0,
             "value" : 0
          }
@@ -275,7 +275,7 @@
             "index" : 27,
             "max" : 100,
             "min" : 0.01,
-            "name" : "p0028.png",
+            "name" : "p0028.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -285,7 +285,7 @@
             "index" : 28,
             "max" : 100,
             "min" : 0.01,
-            "name" : "p0029.png",
+            "name" : "p0029.jpg",
             "type" : 0,
             "value" : 1
          }
@@ -295,7 +295,7 @@
             "index" : 29,
             "max" : 1280,
             "min" : 0.01,
-            "name" : "p0030.png",
+            "name" : "p0030.jpg",
             "type" : 0,
             "value" : 640
          }
@@ -305,7 +305,7 @@
             "index" : 30,
             "max" : 800,
             "min" : 0.01,
-            "name" : "p0031.png",
+            "name" : "p0031.jpg",
             "type" : 0,
             "value" : 480
          }
@@ -315,7 +315,7 @@
             "index" : 31,
             "max" : 256,
             "min" : 0.01,
-            "name" : "p0032.png",
+            "name" : "p0032.jpg",
             "type" : 0,
             "value" : 0
          }

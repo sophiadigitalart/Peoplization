@@ -71,7 +71,7 @@ private:
 	bool							mouseGlobal;
 
 	string							mError;
-	// fbo
+	
 	bool							mIsShutDown;
 	Anim<float>						mRenderWindowTimer;
 	void							positionRenderWindow();
@@ -86,6 +86,10 @@ private:
 	fs::path						mTexturesJson;
 	void							textureFromJson(const ci::JsonTree &json);
 
+	//! shaders
+	gl::GlslProgRef					mGlslBlend;
+
+	void drawContent();
 	// ui
 	params::InterfaceGlRef			mParams;
 };

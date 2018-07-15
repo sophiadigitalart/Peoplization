@@ -40,14 +40,22 @@ PeoplizationApp::PeoplizationApp()
 	else {
 		quit();
 	}
+	
+	
+	//mGlslBlend = gl::GlslProg::create(mDefaultVextexShaderString, mMixFragmentShaderString);
+	mGlslBlend = gl::GlslProg::create(gl::GlslProg::Format().vertex(loadAsset("passthrough.vs"))
+		.fragment(loadAsset("mixtextures.glsl")));
+	
+
 	mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
 	mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
 	mParams->addParam("currentTime", &currentTime).min(0.1f).max(20.5f).keyIncr("q").keyDecr("Q").precision(2).step(0.2f);
 	mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
 	mParams->addParam("mPingPong", &mPingPong);
 	mParams->addParam("delta", &delta);
-
+	
 }
+
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
 
 	JsonTree json(source);
@@ -78,7 +86,7 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		jValue = (u.hasChild("value")) ? u.getValueForKey<float>("value") : 0.01f;
 		jMin = (u.hasChild("min")) ? u.getValueForKey<float>("min") : 0.0f;
 		jMax = (u.hasChild("max")) ? u.getValueForKey<float>("max") : 1.0f;
-		fs::path fullPath = getAssetPath("") / "sequence" / jName;
+		fs::path fullPath = getAssetPath("") / "png24" / jName;
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
@@ -216,10 +224,36 @@ void PeoplizationApp::update()
 	if (delta > mDuration * 2.0f) {
 		
 	}
+
+	
+
+}
+void PeoplizationApp::drawContent()
+{
+	// texture binding must be before ScopedGlslProg
+	mTexs[pingTexIndex].mTexture->bind(0);
+	mTexs[pongTexIndex].mTexture->bind(1);
+	// gl::ScopedTextureBind colorTex(mGBuffer->getTexture2d(G_COLOR), 0);
+	gl::ScopedGlslProg prog(mGlslBlend);
+	gl::ScopedBlendPremult blend;
+
+	mGlslBlend->uniform("iGlobalTime", (float)getElapsedSeconds());
+	//mGlslBlend->uniform("iResolution", vec3(640.0, 480.0, 1.0));
+	
+	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
+	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
+
+	mGlslBlend->uniform("iMouse", vec3(mSDAAnimation->getFloatUniformValueByIndex(35), mSDAAnimation->getFloatUniformValueByIndex(36), mSDAAnimation->getFloatUniformValueByIndex(37)));
+
+	mGlslBlend->uniform("iChannel0", 0); // texture 0
+	mGlslBlend->uniform("iChannel1", 1); // texture 1
+
+
+	gl::drawSolidRect(getWindowBounds());
 }
 void PeoplizationApp::draw()
 {
-	gl::clear(Color::black());
+	gl::clear(ColorA(0, 0, 0, 0));
 	if (mFadeInDelay) {
 		mSDASettings->iAlpha = 0.0f;
 		if (getElapsedFrames() > mSDASession->getFadeInDelay()) {
@@ -227,16 +261,25 @@ void PeoplizationApp::draw()
 			timeline().apply(&mSDASettings->iAlpha, 0.0f, 1.0f, 1.5f, EaseInCubic());
 		}
 	}
-	gl::ScopedModelMatrix scpModel;
+	//gl::ScopedModelMatrix scpModel; 
+	/*gl::ScopedGlslProg glslScope(mGlslBlend);
+	gl::clear(ColorA(0, 0, 0, 0));
+	gl::drawSolidRect(Rectf(0, 0, mSDASettings->mRenderWidth, mSDASettings->mRenderHeight));
+	
+	//gl::enableAlphaBlending();
 	gl::translate(mPingStart().x * mSDASettings->mRenderWidth, mPingStart().y * mSDASettings->mRenderHeight);
-	gl::scale(mPingScale(), mPingScale());
+	gl::scale(mPingScale(), mPingScale());*/
 	if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
-	gl::draw(mTexs[pingTexIndex].mTexture);
+	/*gl::draw(mTexs[pingTexIndex].mTexture);
 
 	gl::translate(mPongStart().x * mSDASettings->mRenderWidth, mPongStart().y * mSDASettings->mRenderHeight);
-	gl::scale(mPongScale(), mPongScale());
+	gl::scale(mPongScale(), mPongScale());*/
 	if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
-	gl::draw(mTexs[pongTexIndex].mTexture);
+	//gl::draw(mTexs[pongTexIndex].mTexture);
+//gl::draw(mFbo->getColorTexture());
+	
+gl::setMatricesWindow(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, false);
+drawContent();
 
 	/*
 	i = 0;

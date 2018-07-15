@@ -207,7 +207,8 @@
   <ItemGroup>
     <None Include="..\assets\animation.json" />
     <None Include="..\assets\live_params.json" />
-    <None Include="..\assets\mixall.frag" />
+    <None Include="..\assets\mixtextures.glsl" />
+    <None Include="..\assets\texturesmix.frag" />
     <None Include="..\assets\passthru.frag" />
     <None Include="..\assets\passthru.vert" />
     <None Include="..\assets\session.json" />
@@ -274,4 +275,9 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties __JSONSchema="http://json.schemastore.org/chrome-manifest" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

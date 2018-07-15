@@ -212,9 +212,6 @@
     <None Include="..\assets\live_params.json">
       <Filter>assets</Filter>
     </None>
-    <None Include="..\assets\mixall.frag">
-      <Filter>assets</Filter>
-    </None>
     <None Include="..\assets\passthru.frag">
       <Filter>assets</Filter>
     </None>
@@ -231,6 +228,12 @@
       <Filter>assets</Filter>
     </None>
     <None Include="..\assets\uniforms.json">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\texturesmix.frag">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\mixtextures.glsl">
       <Filter>assets</Filter>
     </None>
   </ItemGroup>
