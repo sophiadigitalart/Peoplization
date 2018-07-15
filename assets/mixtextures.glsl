@@ -7,6 +7,8 @@ uniform sampler2D 	iChannel1; 				// input channel 1
 uniform int        	iBlendmode;          	// blendmode for channels
 uniform float     	iZoom0;
 uniform float     	iZoom1;
+uniform vec2      	iPos0;
+uniform vec2      	iPos1;
 
 out vec4 fragColor;
 vec2  fragCoord = gl_FragCoord.xy; // keep the 2 spaces between vec2 and fragCoord
@@ -213,8 +215,8 @@ vec3 luminosity( vec3 s, vec3 d )
 void main() {
 	vec2 uv = gl_FragCoord.xy / iResolution.xy;
 
-	vec3 t0 = texture(iChannel0, uv/iZoom0 ).xyz;
-	vec3 t1 = texture(iChannel1, uv/iZoom1  ).xyz;
+	vec3 t0 = texture(iChannel0, uv/iZoom0 + iPos0 ).xyz;
+	vec3 t1 = texture(iChannel1, uv/iZoom1 + iPos1 ).xyz;
 	vec3 c = vec3(0.0);
    switch ( iBlendmode )
    {

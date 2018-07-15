@@ -192,14 +192,14 @@ void nextPingTexture()
 	CI_LOG_I("nextPingTexture");
 	pingTexIndex += 2;
 	mPingScale = 0.01f;
-	mPingStart = vec2(0.5f);
+	mPingStart = vec2(0.05f);
 }
 void nextPongTexture()
 {
 	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
 	mPongScale = 0.01f;
-	mPongStart = vec2(0.5f);
+	mPongStart = vec2(1.05f);
 }
 
 void PeoplizationApp::startAnimation()
@@ -224,12 +224,9 @@ void PeoplizationApp::update()
 		mPingPong = !mPingPong;
 		startAnimation();
 	}
-	if (delta > mDuration * 2.0f) {
+	if (delta > mDuration / 2.0f) {
 		
 	}
-
-	
-
 }
 void PeoplizationApp::drawContent()
 {
@@ -242,8 +239,19 @@ void PeoplizationApp::drawContent()
 
 	mGlslBlend->uniform("iGlobalTime", (float)getElapsedSeconds());
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
-	mGlslBlend->uniform("iZoom0", mPingScale);
-	mGlslBlend->uniform("iZoom1", mPongScale);
+	if (mPingPong) {
+		mGlslBlend->uniform("iZoom0", mPingScale);
+		mGlslBlend->uniform("iZoom1", mPingScale / 12.0f);//mPongScale);
+	}
+	else
+	{
+		mGlslBlend->uniform("iZoom0", mPongScale);
+		mGlslBlend->uniform("iZoom1", mPongScale / 12.0f);//mPongScale);
+	}
+	//mGlslBlend->uniform("iZoom0", 1.0f);// mPingScale);
+	//mGlslBlend->uniform("iZoom1", 0.3f);//mPongScale);
+	mGlslBlend->uniform("iPos0", mPingStart);
+	mGlslBlend->uniform("iPos1", mPongStart);
 
 	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 
