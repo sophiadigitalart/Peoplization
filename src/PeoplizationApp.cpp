@@ -27,6 +27,8 @@ PeoplizationApp::PeoplizationApp()
 	pingTexIndex = 0;
 	pongTexIndex = 1;
 	mPingPong = false;
+	mPingAnimInProgress = false;
+	mPongAnimInProgress = false;
 	currentTime = 2.0f;
 	mScaleMax = 2.0f;
 	delta = 0.01f;
@@ -193,6 +195,7 @@ void nextPingTexture()
 	pingTexIndex += 2;
 	mPingScale = 0.01f;
 	mPingStart = vec2(0.05f);
+	mPingAnimInProgress = false;
 }
 void nextPongTexture()
 {
@@ -200,18 +203,24 @@ void nextPongTexture()
 	pongTexIndex += 2;
 	mPongScale = 0.01f;
 	mPongStart = vec2(1.05f);
+	mPongAnimInProgress = false;
 }
 
 void PeoplizationApp::startAnimation()
 {
-	CI_LOG_I("ping startAnimation");
-	timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
-	timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
-	timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
-	CI_LOG_I("pong startAnimation");
-	timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-	timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
-	
+	/*if (mPingPong) {
+		CI_LOG_I("ping startAnimation");
+		timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+		//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
+		timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+	}
+	else {
+		CI_LOG_I("pong startAnimation");
+		timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+		timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+
+	}
+	*/
 }
 void PeoplizationApp::update()
 {
@@ -221,12 +230,29 @@ void PeoplizationApp::update()
 	if (delta > mDuration) { // 6.0f) {
 		CI_LOG_I("ping");
 		currentTime = getElapsedSeconds();
-		mPingPong = !mPingPong;
-		startAnimation();
+		//mPingPong = !mPingPong;
+		//startAnimation();
 	}
 	if (delta > mDuration / 2.0f) {
-		
+		mPingPong = false;
+		if (!mPongAnimInProgress) {
+			mPongAnimInProgress = true;
+			CI_LOG_I("pong startAnimation");
+			//timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+		}
 	}
+	else {
+		mPingPong = true;
+		if (!mPingAnimInProgress) {
+			mPingAnimInProgress = true;
+			CI_LOG_I("ping startAnimation");
+			//timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+			//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
+			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+		}
+	}
+
 }
 void PeoplizationApp::drawContent()
 {

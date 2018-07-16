@@ -30,6 +30,8 @@ ci::Anim<vec2>						mPingStart;
 ci::Anim<vec2>						mPongStart;
 float								mDuration;
 bool								mPingPong;
+bool								mPingAnimInProgress;
+bool								mPongAnimInProgress;
 
 struct Tex {
 	vec2							mPosEnd;
