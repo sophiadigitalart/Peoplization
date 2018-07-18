@@ -175,6 +175,12 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		case KeyEvent::KEY_q:
 			//startAnimation();
 			break;
+		case KeyEvent::KEY_u:
+			pingTexIndex += 2;
+			if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
+			pongTexIndex += 2;
+			if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
+			break;
 
 		case KeyEvent::KEY_h:
 			// mouse cursor and ui visibility
@@ -194,7 +200,7 @@ void nextPingTexture()
 	CI_LOG_I("nextPingTexture");
 	pingTexIndex += 2;
 	mPingScale = 0.01f;
-	mPingStart = vec2(0.05f);
+	mPingStart = vec2(0.5f);
 	mPingAnimInProgress = false;
 }
 void nextPongTexture()
@@ -202,7 +208,7 @@ void nextPongTexture()
 	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
 	mPongScale = 0.01f;
-	mPongStart = vec2(1.05f);
+	mPongStart = vec2(0.5f);
 	mPongAnimInProgress = false;
 }
 
@@ -238,7 +244,7 @@ void PeoplizationApp::update()
 		if (!mPongAnimInProgress) {
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
-			//timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
 			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
@@ -247,7 +253,7 @@ void PeoplizationApp::update()
 		if (!mPingAnimInProgress) {
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
-			//timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
 			//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
 			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
