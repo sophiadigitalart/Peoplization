@@ -91,6 +91,10 @@ private:
 	//! shaders
 	gl::GlslProgRef					mGlslBlend;
 	int								iBlendmode;
+	float							iPos0x;
+	float							iPos0y;
+	float							iPos1x;
+	float							iPos1y;
 
 	void drawContent();
 	// ui

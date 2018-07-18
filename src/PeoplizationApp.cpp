@@ -32,6 +32,10 @@ PeoplizationApp::PeoplizationApp()
 	currentTime = 2.0f;
 	mScaleMax = 2.0f;
 	delta = 0.01f;
+	iPos0x = -40.5f;
+	iPos0y = -40.5f;
+	iPos1x = 0.5f;
+	iPos1y = 0.5f;
 
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
@@ -42,12 +46,12 @@ PeoplizationApp::PeoplizationApp()
 	else {
 		quit();
 	}
-	
+
 	iBlendmode = 8;
 	//mGlslBlend = gl::GlslProg::create(mDefaultVextexShaderString, mMixFragmentShaderString);
 	mGlslBlend = gl::GlslProg::create(gl::GlslProg::Format().vertex(loadAsset("passthrough.vs"))
 		.fragment(loadAsset("mixtextures.glsl")));
-	
+
 
 	mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
 	mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
@@ -56,7 +60,11 @@ PeoplizationApp::PeoplizationApp()
 	mParams->addParam("mPingPong", &mPingPong);
 	mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
 	mParams->addParam("delta", &delta);
-	
+	mParams->addParam("iPos0x", &iPos0x);
+	mParams->addParam("iPos0y", &iPos0y);
+	mParams->addParam("iPos1x", &iPos1x);
+	mParams->addParam("iPos1y", &iPos1y);
+
 }
 
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
@@ -244,7 +252,7 @@ void PeoplizationApp::update()
 		if (!mPongAnimInProgress) {
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
-			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			//timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
 			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
@@ -253,7 +261,7 @@ void PeoplizationApp::update()
 		if (!mPingAnimInProgress) {
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
-			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+			//timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
 			//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
 			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
@@ -282,8 +290,9 @@ void PeoplizationApp::drawContent()
 	}
 	//mGlslBlend->uniform("iZoom0", 1.0f);// mPingScale);
 	//mGlslBlend->uniform("iZoom1", 0.3f);//mPongScale);
-	mGlslBlend->uniform("iPos0", mPingStart);
-	mGlslBlend->uniform("iPos1", mPongStart);
+	
+	mGlslBlend->uniform("iPos0", vec2(iPos0x, iPos0y));
+	mGlslBlend->uniform("iPos1", mPongStart());
 
 	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 
@@ -310,7 +319,7 @@ void PeoplizationApp::draw()
 	/*gl::ScopedGlslProg glslScope(mGlslBlend);
 	gl::clear(ColorA(0, 0, 0, 0));
 	gl::drawSolidRect(Rectf(0, 0, mSDASettings->mRenderWidth, mSDASettings->mRenderHeight));
-	
+
 	//gl::enableAlphaBlending();
 	gl::translate(mPingStart().x * mSDASettings->mRenderWidth, mPingStart().y * mSDASettings->mRenderHeight);
 	gl::scale(mPingScale(), mPingScale());*/
@@ -321,10 +330,10 @@ void PeoplizationApp::draw()
 	gl::scale(mPongScale(), mPongScale());*/
 	if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
 	//gl::draw(mTexs[pongTexIndex].mTexture);
-//gl::draw(mFbo->getColorTexture());
-	
-gl::setMatricesWindow(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, false);
-drawContent();
+	//gl::draw(mFbo->getColorTexture());
+
+	gl::setMatricesWindow(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, false);
+	drawContent();
 
 	/*
 	i = 0;

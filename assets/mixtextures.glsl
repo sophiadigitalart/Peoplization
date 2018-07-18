@@ -10,7 +10,7 @@ uniform float     	iZoom1;
 uniform vec2      	iPos0;
 uniform vec2      	iPos1;
 
-out vec4 fragColor;
+//out vec4 fragColor;
 vec2  fragCoord = gl_FragCoord.xy; // keep the 2 spaces between vec2 and fragCoord
 // Blend functions begin
 vec3 multiply( vec3 s, vec3 d )
@@ -306,5 +306,5 @@ void main() {
       break;
    }
 
-   	fragColor = vec4(c,1.0);
+   	gl_FragColor = vec4(c,1.0);
 }
