@@ -1,5 +1,13 @@
 #include "PeoplizationApp.h"
+/*
+z 0.001 x y -500
+z 0.01 x y -50
+z 0.1 x y 
+z 1 x y 0
+z 2 x y 0.2
 
+
+*/
 PeoplizationApp::PeoplizationApp()
 	: mSpoutOut("SDA", app::getWindowSize())
 {
@@ -36,8 +44,8 @@ PeoplizationApp::PeoplizationApp()
 	iPos0y = 0.05f;
 	iPos1x = 0.05f;
 	iPos1y = 0.05f;
-	iZoom0 = 1.0f;
-	iZoom1 = 1.0f;
+	iZoom0 = 0.1f;
+	iZoom1 = 0.1f;
 
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
@@ -62,12 +70,12 @@ PeoplizationApp::PeoplizationApp()
 	mParams->addParam("mPingPong", &mPingPong); */
 	mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
 	mParams->addParam("delta", &delta);
-	mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.01f);
-	mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.01f);
-	mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.01f);
-	mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.01f);
-	mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.01f);
-	mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.01f);
+	mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.1f);
+	mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.1f);
+	mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.1f);
+	mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.1f);
+	mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.1f);
+	mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.1f);
 
 }
 
