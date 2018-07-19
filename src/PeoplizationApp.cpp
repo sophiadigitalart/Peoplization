@@ -32,10 +32,12 @@ PeoplizationApp::PeoplizationApp()
 	currentTime = 2.0f;
 	mScaleMax = 2.0f;
 	delta = 0.01f;
-	iPos0x = -40.5f;
-	iPos0y = -40.5f;
-	iPos1x = 0.5f;
-	iPos1y = 0.5f;
+	iPos0x = 0.05f;
+	iPos0y = 0.05f;
+	iPos1x = 0.05f;
+	iPos1y = 0.05f;
+	iZoom0 = 1.0f;
+	iZoom1 = 1.0f;
 
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
@@ -54,16 +56,18 @@ PeoplizationApp::PeoplizationApp()
 
 
 	mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
-	mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
+	/*mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
 	mParams->addParam("currentTime", &currentTime).min(0.1f).max(20.5f).keyIncr("q").keyDecr("Q").precision(2).step(0.2f);
 	mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
-	mParams->addParam("mPingPong", &mPingPong);
+	mParams->addParam("mPingPong", &mPingPong); */
 	mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
 	mParams->addParam("delta", &delta);
-	mParams->addParam("iPos0x", &iPos0x);
-	mParams->addParam("iPos0y", &iPos0y);
-	mParams->addParam("iPos1x", &iPos1x);
-	mParams->addParam("iPos1y", &iPos1y);
+	mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.01f);
+	mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.01f);
+	mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.01f);
+	mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.01f);
+	mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.01f);
+	mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.01f);
 
 }
 
@@ -174,29 +178,29 @@ void PeoplizationApp::mouseUp(MouseEvent event)
 void PeoplizationApp::keyDown(KeyEvent event)
 {
 
-	if (!mSDASession->handleKeyDown(event)) {
-		switch (event.getCode()) {
-		case KeyEvent::KEY_ESCAPE:
-			// quit the application
-			quit();
-			break;
-		case KeyEvent::KEY_q:
-			//startAnimation();
-			break;
-		case KeyEvent::KEY_u:
-			pingTexIndex += 2;
-			if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
-			pongTexIndex += 2;
-			if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
-			break;
+	//if (!mSDASession->handleKeyDown(event)) {
+	switch (event.getCode()) {
+	case KeyEvent::KEY_ESCAPE:
+		// quit the application
+		quit();
+		break;
+	case KeyEvent::KEY_q:
+		//startAnimation();
+		break;
+	case KeyEvent::KEY_u:
+		pingTexIndex += 2;
+		if (pingTexIndex > mTexs.size() - 1) pingTexIndex = 0;
+		pongTexIndex += 2;
+		if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
+		break;
 
-		case KeyEvent::KEY_h:
-			// mouse cursor and ui visibility
-			mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
-			setUIVisibility(mSDASettings->mCursorVisible);
-			break;
-		}
+	case KeyEvent::KEY_h:
+		// mouse cursor and ui visibility
+		mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
+		setUIVisibility(mSDASettings->mCursorVisible);
+		break;
 	}
+	//}
 }
 void PeoplizationApp::keyUp(KeyEvent event)
 {
@@ -253,7 +257,7 @@ void PeoplizationApp::update()
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
 			//timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+			///timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 	else {
@@ -263,7 +267,7 @@ void PeoplizationApp::update()
 			CI_LOG_I("ping startAnimation");
 			//timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
 			//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
-			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+			//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 
@@ -279,7 +283,9 @@ void PeoplizationApp::drawContent()
 
 	mGlslBlend->uniform("iGlobalTime", (float)getElapsedSeconds());
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
-	if (mPingPong) {
+	mGlslBlend->uniform("iZoom0", iZoom0);
+	mGlslBlend->uniform("iZoom1", iZoom1);
+	/*if (mPingPong) {
 		mGlslBlend->uniform("iZoom0", mPingScale);
 		mGlslBlend->uniform("iZoom1", mPingScale / 12.0f);//mPongScale);
 	}
@@ -287,12 +293,12 @@ void PeoplizationApp::drawContent()
 	{
 		mGlslBlend->uniform("iZoom0", mPongScale);
 		mGlslBlend->uniform("iZoom1", mPongScale / 12.0f);//mPongScale);
-	}
+	} */
 	//mGlslBlend->uniform("iZoom0", 1.0f);// mPingScale);
 	//mGlslBlend->uniform("iZoom1", 0.3f);//mPongScale);
-	
+
 	mGlslBlend->uniform("iPos0", vec2(iPos0x, iPos0y));
-	mGlslBlend->uniform("iPos1", mPongStart());
+	mGlslBlend->uniform("iPos1", vec2(iPos1x, iPos1y)); //mPongStart());
 
 	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 

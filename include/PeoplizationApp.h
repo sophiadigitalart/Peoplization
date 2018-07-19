@@ -95,6 +95,8 @@ private:
 	float							iPos0y;
 	float							iPos1x;
 	float							iPos1y;
+	float							iZoom0;
+	float							iZoom1;
 
 	void drawContent();
 	// ui
