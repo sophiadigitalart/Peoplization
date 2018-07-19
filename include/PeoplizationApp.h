@@ -32,6 +32,9 @@ float								mDuration;
 bool								mPingPong;
 bool								mPingAnimInProgress;
 bool								mPongAnimInProgress;
+const float							zoomStart = 1.01f;
+const float							xStart = 0.0f;
+const float							yStart = 0.0f;
 
 struct Tex {
 	vec2							mPosEnd;
