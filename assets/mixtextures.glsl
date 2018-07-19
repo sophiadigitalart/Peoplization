@@ -213,7 +213,7 @@ vec3 luminosity( vec3 s, vec3 d )
 }
 // Blend functions end
 void main() {
-	vec2 uv = gl_FragCoord.xy / iResolution.xy;
+	vec2 uv = gl_FragCoord.xy / iResolution.xy - 0.5;
 
 	vec3 t0 = texture(iChannel0, uv/iZoom0 + iPos0 ).xyz;
 	vec3 t1 = texture(iChannel1, uv/iZoom1 + iPos1 ).xyz;

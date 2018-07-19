@@ -35,7 +35,7 @@ PeoplizationApp::PeoplizationApp()
 	mScaleMax = 2.0f;
 	delta = 0.01f;
 	mPingScale = mPongScale = iZoom0 = iZoom1 = zoomStart;
-	iPos0x = iPos1x = xStart ;
+	iPos0x = iPos1x = xStart;
 	iPos0y = iPos1y = yStart;
 
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
@@ -252,8 +252,8 @@ void PeoplizationApp::update()
 		if (!mPongAnimInProgress) {
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
-			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+			//timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 	else {
@@ -261,8 +261,8 @@ void PeoplizationApp::update()
 		if (!mPingAnimInProgress) {
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
-			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
-			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+			//timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+			//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 
@@ -279,16 +279,26 @@ void PeoplizationApp::drawContent()
 	//mGlslBlend->uniform("iGlobalTime", mSDAAnimation->getFloatUniformValueByIndex(mSDASettings->ITIME));
 	mGlslBlend->uniform("iGlobalTime", (float)getElapsedSeconds());
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
-	iZoom0 = mPingScale;
+	/*iZoom0 = mPingScale;
 	iZoom1 = mPongScale;
-
-	mGlslBlend->uniform("iZoom0", iZoom0);
-	mGlslBlend->uniform("iZoom1", iZoom1);
 	iPos0x = mPingStart().x;
 	iPos0y = mPingStart().y;
 	iPos1x = mPongStart().x;
-	iPos1y = mPongStart().y;
+	iPos1y = mPongStart().y;*/
 
+	iZoom0 += 0.001f;
+	iZoom1 += 0.001f;
+	iPos0x += 0.001f;
+	iPos0y += 0.001f;
+	iPos1x += 0.001f;
+	iPos1y += 0.001f;
+	if (iZoom0 > 2.0f) {
+		mPingScale = mPongScale = iZoom0 = iZoom1 = zoomStart;
+		iPos0x = iPos1x = xStart;
+		iPos0y = iPos1y = yStart;
+	}
+	mGlslBlend->uniform("iZoom0", iZoom0);
+	mGlslBlend->uniform("iZoom1", iZoom1);
 	mGlslBlend->uniform("iPos0", vec2(iPos0x, iPos0y));
 	mGlslBlend->uniform("iPos1", vec2(iPos1x, iPos1y)); //mPongStart());
 
