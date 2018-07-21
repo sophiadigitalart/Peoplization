@@ -101,7 +101,7 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
-			mTex.mPosEnd = vec2(-50.5f, -50.5f);
+			mTex.mPosEnd = vec2(0.56f, 0.73f);
 			mTexs.push_back(mTex);
 		}
 	}
@@ -259,7 +259,7 @@ void PeoplizationApp::update()
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
 			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone());//.finishFn(nextPongTexture);
-			//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 	else {
@@ -268,7 +268,7 @@ void PeoplizationApp::update()
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
 			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone());// .finishFn(nextPingTexture);
-			//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
+			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
 
@@ -287,10 +287,10 @@ void PeoplizationApp::drawContent()
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
 	iZoom0 = mPingScale;
 	iZoom1 = mPongScale;
-	/*iPos0x = mPingStart().x;
+	iPos0x = mPingStart().x;
 	iPos0y = mPingStart().y;
 	iPos1x = mPongStart().x;
-	iPos1y = mPongStart().y; */
+	iPos1y = mPongStart().y;
 
 	/*iZoom0 += 0.001f;
 	iZoom1 += 0.001f;
@@ -314,6 +314,7 @@ void PeoplizationApp::drawContent()
 	mGlslBlend->uniform("iBlendmode", iBlendmode); // texture 0
 
 	gl::drawSolidRect(getWindowBounds());
+	
 }
 void PeoplizationApp::draw()
 {
@@ -330,7 +331,7 @@ void PeoplizationApp::draw()
 
 	gl::setMatricesWindow(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, false);
 	drawContent();
-
+	
 	// Spout Send
 	mSpoutOut.sendViewport();
 	// Draw the interface
