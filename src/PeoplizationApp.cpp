@@ -258,7 +258,8 @@ void PeoplizationApp::update()
 		if (!mPongAnimInProgress) {
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
-			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone());//.finishFn(nextPongTexture);
+			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
+			timeline().appendTo(&mPongScale, mScaleMax * 54.0f, mDuration, EaseNone());// .delay(1.0f);
 			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
@@ -267,7 +268,8 @@ void PeoplizationApp::update()
 		if (!mPingAnimInProgress) {
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
-			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone());// .finishFn(nextPingTexture);
+			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			timeline().appendTo(&mPingScale, mScaleMax * 54.0f, mDuration, EaseNone());// .delay(1.0f);
 			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
 		}
 	}
