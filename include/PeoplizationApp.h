@@ -38,6 +38,7 @@ const float							xStart = 0.0f;
 const float							yStart = 0.0f;
 
 struct Tex {
+	vec2							mPosStart;
 	vec2							mPosEnd;
 	ci::gl::TextureRef				mTexture;
 };

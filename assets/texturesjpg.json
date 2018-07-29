@@ -3,28 +3,28 @@
       {
          "texture" : {
             "index" : 0,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.28,
+            "posy" : 0.67,
             "name" : "p0001.jpg",
             "type" : 0,
             "value" : 0
          }
       },
       {
-         "texture" : {
-            "index" : 1,
-            "max" : 1,
-            "min" : 0,
-            "name" : "p0002.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 1,
+          "posx": 0.57,
+          "posy": 0.57,
+          "name": "p0002.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
          "texture" : {
             "index" : 2,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0003.jpg",
             "type" : 0,
             "value" : 0.29999999999999999
@@ -33,8 +33,8 @@
       {
          "texture" : {
             "index" : 3,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0004.jpg",
             "type" : 0,
             "value" : 0
@@ -43,118 +43,118 @@
       {
          "texture" : {
             "index" : 4,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0005.jpg",
             "type" : 0,
             "value" : 1
          }
       },
       {
-         "texture" : {
-            "index" : 5,
-            "max" : 3,
-            "min" : 0,
-            "name" : "p0006.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 5,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0006.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
-         "texture" : {
-            "index" : 6,
-            "max" : 3,
-            "min" : 0,
-            "name" : "p0007.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 6,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0007.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
-         "texture" : {
-            "index" : 7,
-            "max" : 3,
-            "min" : 0,
-            "name" : "p0008.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 7,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0008.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
-         "texture" : {
-            "index" : 8,
-            "max" : 5,
-            "min" : 0,
-            "name" : "p0009.jpg",
-            "type" : 0,
-            "value" : 0
-         }
+        "texture": {
+          "index": 8,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0009.jpg",
+          "type": 0,
+          "value": 0
+        }
       },
       {
-         "texture" : {
-            "index" : 9,
-            "max" : 2,
-            "min" : -2,
-            "name" : "p0010.jpg",
-            "type" : 0,
-            "value" : 0
-         }
+        "texture": {
+          "index": 9,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0010.jpg",
+          "type": 0,
+          "value": 0
+        }
       },
       {
-         "texture" : {
-            "index" : 10,
-            "max" : 128,
-            "min" : 1,
-            "name" : "p0011.jpg",
-            "type" : 0,
-            "value" : 16
-         }
+        "texture": {
+          "index": 10,
+          "posx": 0.5628,
+          "posy": 0.73,
+          "name": "p0011.jpg",
+          "type": 0,
+          "value": 16
+        }
       },
       {
-         "texture" : {
-            "index" : 11,
-            "max" : 20,
-            "min" : 9.9999999999999994e-12,
-            "name" : "p0012.jpg",
-            "type" : 0,
-            "value" : 20
-         }
+        "texture": {
+          "index": 11,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0012.jpg",
+          "type": 0,
+          "value": 20
+        }
       },
       {
-         "texture" : {
-            "index" : 12,
-            "max" : 3,
-            "min" : -3,
-            "name" : "p0013.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 12,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0013.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
          "texture" : {
             "index" : 13,
-            "max" : 12,
-            "min" : 0.01,
+            "posx" : 0.562,
+            "posy" : 0.73,
             "name" : "p0014.jpg",
             "type" : 0,
             "value" : 1
          }
       },
       {
-         "texture" : {
-            "index" : 14,
-            "max" : 3,
-            "min" : 0,
-            "name" : "p0015.jpg",
-            "type" : 0,
-            "value" : 1
-         }
+        "texture": {
+          "index": 14,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0015.jpg",
+          "type": 0,
+          "value": 1
+        }
       },
       {
          "texture" : {
             "index" : 15,
-            "max" : 1,
-            "min" : 0.01,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0016.jpg",
             "type" : 0,
             "value" : 1
@@ -163,28 +163,28 @@
       {
          "texture" : {
             "index" : 16,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0017.jpg",
             "type" : 0,
             "value" : 0
          }
       },
       {
-         "texture" : {
-            "index" : 17,
-            "max" : 1,
-            "min" : 1.0000000000000001e-09,
-            "name" : "p0018.jpg",
-            "type" : 0,
-            "value" : 0
-         }
+        "texture": {
+          "index": 17,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0018.jpg",
+          "type": 0,
+          "value": 0
+        }
       },
       {
          "texture" : {
             "index" : 18,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0019.jpg",
             "type" : 0,
             "value" : 1
@@ -193,8 +193,8 @@
       {
          "texture" : {
             "index" : 19,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0020.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
@@ -203,8 +203,8 @@
       {
          "texture" : {
             "index" : 20,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0021.jpg",
             "type" : 0,
             "value" : 0.5
@@ -213,8 +213,8 @@
       {
          "texture" : {
             "index" : 21,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0022.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
@@ -223,8 +223,8 @@
       {
          "texture" : {
             "index" : 22,
-            "max" : 12,
-            "min" : 0.01,
+            "posx" : 0.562,
+            "posy" : 0.73,
             "name" : "p0023.jpg",
             "type" : 0,
             "value" : 12
@@ -233,8 +233,8 @@
       {
          "texture" : {
             "index" : 23,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0024.jpg",
             "type" : 0,
             "value" : 0.20000000000000001
@@ -243,38 +243,38 @@
       {
          "texture" : {
             "index" : 24,
-            "max" : 1,
-            "min" : 0,
+            "posx" : 0.56,
+            "posy" : 0.73,
             "name" : "p0025.jpg",
             "type" : 0,
             "value" : 0.10000000000000001
          }
       },
       {
-         "texture" : {
-            "index" : 25,
-            "max" : 500,
-            "min" : 0,
-            "name" : "p0026.jpg",
-            "type" : 0,
-            "value" : 60
-         }
+        "texture": {
+          "index": 25,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0026.jpg",
+          "type": 0,
+          "value": 60
+        }
       },
       {
-         "texture" : {
-            "index" : 26,
-            "max" : 0.5,
-            "min" : 0,
-            "name" : "p0027.jpg",
-            "type" : 0,
-            "value" : 0
-         }
+        "texture": {
+          "index": 26,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0027.jpg",
+          "type": 0,
+          "value": 0
+        }
       },
       {
          "texture" : {
             "index" : 27,
-            "max" : 100,
-            "min" : 0.01,
+            "posx" : 0.5600,
+            "posy" : 0.73,
             "name" : "p0028.jpg",
             "type" : 0,
             "value" : 1
@@ -283,8 +283,8 @@
       {
          "texture" : {
             "index" : 28,
-            "max" : 100,
-            "min" : 0.01,
+            "posx" : 0.5600,
+            "posy" : 0.73,
             "name" : "p0029.jpg",
             "type" : 0,
             "value" : 1
@@ -293,32 +293,32 @@
       {
          "texture" : {
             "index" : 29,
-            "max" : 1280,
-            "min" : 0.01,
+            "posx" : 0.56280,
+            "posy" : 0.73,
             "name" : "p0030.jpg",
             "type" : 0,
             "value" : 640
          }
       },
       {
-         "texture" : {
-            "index" : 30,
-            "max" : 800,
-            "min" : 0.01,
-            "name" : "p0031.jpg",
-            "type" : 0,
-            "value" : 480
-         }
+        "texture": {
+          "index": 30,
+          "posx": 0.56,
+          "posy": 0.73,
+          "name": "p0031.jpg",
+          "type": 0,
+          "value": 480
+        }
       },
       {
-         "texture" : {
-            "index" : 31,
-            "max" : 256,
-            "min" : 0.01,
-            "name" : "p0032.jpg",
-            "type" : 0,
-            "value" : 0
-         }
+        "texture": {
+          "index": 31,
+          "posx": 0.56,
+          "posy": "0.73",
+          "name": "p0032.jpg",
+          "type": 0,
+          "value": 0
+        }
       }
    ]
 }

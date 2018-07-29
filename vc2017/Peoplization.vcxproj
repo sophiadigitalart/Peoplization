@@ -208,6 +208,7 @@
     <None Include="..\assets\animation.json" />
     <None Include="..\assets\live_params.json" />
     <None Include="..\assets\mixtextures.glsl" />
+    <None Include="..\assets\texturesjpg.json" />
     <None Include="..\assets\texturesmix.frag" />
     <None Include="..\assets\passthru.frag" />
     <None Include="..\assets\passthru.vert" />

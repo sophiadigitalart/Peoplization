@@ -236,6 +236,9 @@
     <None Include="..\assets\mixtextures.glsl">
       <Filter>assets</Filter>
     </None>
+    <None Include="..\assets\texturesjpg.json">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\assets\defaulttextures.xml">
