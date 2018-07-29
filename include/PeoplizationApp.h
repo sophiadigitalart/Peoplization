@@ -2,7 +2,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
-#include "cinder/params/Params.h"
+//#include "cinder/params/Params.h"
 
 // Settings
 #include "SDASettings.h"
@@ -26,8 +26,8 @@ int									pingTexIndex, pongTexIndex;
 
 // animation
 ci::Anim<float>						mPingScale, mPongScale;
-ci::Anim<vec2>						mPingStart;
-ci::Anim<vec2>						mPongStart;
+//ci::Anim<vec2>						mPingStart;
+//ci::Anim<vec2>						mPongStart;
 float								mDuration;
 float								mPosDuration;
 bool								mPingPong;
@@ -105,5 +105,5 @@ private:
 
 	void drawContent();
 	// ui
-	params::InterfaceGlRef			mParams;
+	//params::InterfaceGlRef			mParams;
 };

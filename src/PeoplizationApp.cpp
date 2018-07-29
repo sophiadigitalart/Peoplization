@@ -37,8 +37,8 @@ PeoplizationApp::PeoplizationApp()
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
-		mPingStart = vec2(iPos0x, iPos0y);
-		mPongStart = vec2(iPos1x, iPos1y);
+		//mPingStart = vec2(iPos0x, iPos0y);
+		//mPongStart = vec2(iPos1x, iPos1y);
 	}
 	else {
 		quit();
@@ -47,19 +47,19 @@ PeoplizationApp::PeoplizationApp()
 	iBlendmode = 8;
 	mGlslBlend = gl::GlslProg::create(gl::GlslProg::Format().vertex(loadAsset("passthrough.vs")).fragment(loadAsset("mixtextures.glsl")));
 
-	mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
-	mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
-	mParams->addParam("currentTime", &currentTime);
-	mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
-	mParams->addParam("mPingPong", &mPingPong);
-	mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
-	//mParams->addParam("delta", &delta);
-	mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.1f);
-	mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.1f);
-	mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.1f);
-	mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.1f);
-	mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.1f);
-	mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.1f);
+	//mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
+	//mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
+	//mParams->addParam("currentTime", &currentTime);
+	//mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
+	//mParams->addParam("mPingPong", &mPingPong);
+	//mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
+	////mParams->addParam("delta", &delta);
+	//mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.1f);
+	//mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.1f);
+	//mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.1f);
+	//mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.1f);
+	//mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.1f);
+	//mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.1f);
 }
 
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
@@ -147,8 +147,8 @@ void PeoplizationApp::mouseDown(MouseEvent event)
 	else {
 		iPos0x = (float)event.getX() / (float)mSDASettings->mRenderWidth;
 		iPos0y = (float)event.getY() / (float)mSDASettings->mRenderHeight;
-		mPingStart().x = iPos0x;
-		mPingStart().y = iPos0y;
+		//mPingStart().x = iPos0x;
+		//mPingStart().y = iPos0y;
 	}
 }
 void PeoplizationApp::mouseDrag(MouseEvent event)
@@ -333,7 +333,7 @@ void PeoplizationApp::draw()
 	// Spout Send
 	mSpoutOut.sendViewport();
 	// Draw the interface
-	mParams->draw();
+	//mParams->draw();
 	getWindow()->setTitle(mSDASettings->sFps + " fps SDA");
 }
 
