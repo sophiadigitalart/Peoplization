@@ -21,8 +21,7 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
-	mDuration = 1.0f;
-	mPosDuration = 0.10f;
+	mDuration = 2.0f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
 	mPingPong = mPingAnimInProgress = false; 
@@ -37,8 +36,6 @@ PeoplizationApp::PeoplizationApp()
 	mTexturesJson = getAssetPath("") / mSDASettings->mAssetsPath / "texturesjpg.json";
 	if (fs::exists(mTexturesJson)) {
 		loadTextures(loadFile(mTexturesJson));
-		//mPingStart = vec2(iPos0x, iPos0y);
-		//mPongStart = vec2(iPos1x, iPos1y);
 	}
 	else {
 		quit();
@@ -46,20 +43,6 @@ PeoplizationApp::PeoplizationApp()
 
 	iBlendmode = 8;
 	mGlslBlend = gl::GlslProg::create(gl::GlslProg::Format().vertex(loadAsset("passthrough.vs")).fragment(loadAsset("mixtextures.glsl")));
-
-	//mParams = params::InterfaceGl::create(getWindow(), "Parameters", toPixels(ivec2(200, 400)));
-	//mParams->addParam("mDuration", &mDuration).min(0.1f).max(20.5f).keyIncr("d").keyDecr("D").precision(2).step(0.2f);
-	//mParams->addParam("currentTime", &currentTime);
-	//mParams->addParam("mScaleMax", &mScaleMax).min(0.1f).max(20.5f).keyIncr("m").keyDecr("M").precision(2).step(0.2f);
-	//mParams->addParam("mPingPong", &mPingPong);
-	//mParams->addParam("iBlendmode", &iBlendmode).min(0).max(26).keyIncr("b").keyDecr("B");
-	////mParams->addParam("delta", &delta);
-	//mParams->addParam("iPos0x", &iPos0x).keyIncr("x").keyDecr("X").precision(2).step(0.1f);
-	//mParams->addParam("iPos0y", &iPos0y).keyIncr("y").keyDecr("Y").precision(2).step(0.1f);
-	//mParams->addParam("iPos1x", &iPos1x).keyIncr("c").keyDecr("C").precision(2).step(0.1f);
-	//mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.1f);
-	//mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.1f);
-	//mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.1f);
 }
 
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
@@ -87,14 +70,10 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		jName = (u.hasChild("name")) ? u.getValueForKey<string>("name") : "unknown";
 		jCtrlIndex = (u.hasChild("index")) ? u.getValueForKey<int>("index") : 249;
 		jValue = (u.hasChild("value")) ? u.getValueForKey<float>("value") : 0.01f;
-		//jPosX = (u.hasChild("posx")) ? u.getValueForKey<float>("posx") : 0.56f;
-		//jPosY = (u.hasChild("posy")) ? u.getValueForKey<float>("posy") : 0.73f;
 		fs::path fullPath = getAssetPath("") / "seq" / jName;
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
-			//mTex.mPosStart = vec2(-0.5f);// vec2(jPosX, jPosY);
-			//mTex.mPosEnd = vec2(-0.5f);//vec2(jPosX, jPosY);
 			mTexs.push_back(mTex);
 		}
 	}
@@ -147,8 +126,6 @@ void PeoplizationApp::mouseDown(MouseEvent event)
 	else {
 		iPos0x = (float)event.getX() / (float)mSDASettings->mRenderWidth;
 		iPos0y = (float)event.getY() / (float)mSDASettings->mRenderHeight;
-		//mPingStart().x = iPos0x;
-		//mPingStart().y = iPos0y;
 	}
 }
 void PeoplizationApp::mouseDrag(MouseEvent event)
@@ -168,26 +145,6 @@ void PeoplizationApp::keyUp(KeyEvent event)
 	}
 }
 
-void PeoplizationApp::startAnimation()
-{
-	/*if (mPingPong) {
-		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
-		//timeline().appendTo(&mPingScale, 0.1f, mDuration, EaseNone()).delay(1.0f);
-		timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
-	}
-	else {
-		CI_LOG_I("pong startAnimation");
-		timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-		timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
-
-	}
-
-	pingTexIndex += 1;
-	mPingScale = zoomStart;
-	mPingStart = vec2(xStart, yStart);
-	mPingAnimInProgress = false;*/
-}
 void PeoplizationApp::keyDown(KeyEvent event)
 {
 	switch (event.getCode()) {
@@ -207,9 +164,6 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
 		setUIVisibility(mSDASettings->mCursorVisible);
 		break;
-	case KeyEvent::KEY_n:
-		startAnimation();
-		break;
 	}
 }
 void nextPingTexture()
@@ -217,9 +171,6 @@ void nextPingTexture()
 	CI_LOG_I("nextPingTexture");
 	pingTexIndex += 2;
 	mPingScale = zoomStart;
-	//mPingStart = vec2(xStart, yStart);
-	//mPingStart = mTexs[pingTexIndex].mPosStart;
-
 	mPingAnimInProgress = false;
 }
 void nextPongTexture()
@@ -227,7 +178,6 @@ void nextPongTexture()
 	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
 	mPongScale = zoomStart;
-	//mPongStart = vec2(xStart, yStart);
 	mPongAnimInProgress = false;
 }
 void PeoplizationApp::update()
@@ -238,48 +188,15 @@ void PeoplizationApp::update()
 	if (!mPingAnimInProgress) {
 		mPingAnimInProgress = true;
 		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, mScaleMax, mDuration * 1.5f, EaseNone()).finishFn(nextPongTexture);
+		timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
 		timeline().appendTo(&mPingScale, mScaleMax * 40.0f, mDuration, EaseNone());
-		//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone());// .finishFn(nextPongTexture);
 	}
 	if (!mPongAnimInProgress) {
 		mPongAnimInProgress = true;
 		CI_LOG_I("pong startAnimation");
-		timeline().apply(&mPongScale, mScaleMax, mDuration * 1.5f, EaseNone()).finishFn(nextPingTexture);
-		timeline().appendTo(&mPongScale, mScaleMax * 40.0f, mDuration, EaseNone());// .delay(1.0f);
-		//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mPosDuration, EaseNone());
+		timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
+		timeline().appendTo(&mPongScale, mScaleMax * 40.0f, mDuration, EaseNone());
 	}
-	/*if (delta > mDuration) {
-		CI_LOG_I("ping");
-		currentTime = getElapsedSeconds();
-
-	} */
-	//if (delta > mDuration) {
-		//currentTime = getElapsedSeconds();
-		//mPingPong = false;
-				//if (!mPongAnimInProgress) {
-		//	mPongAnimInProgress = true;
-		//	CI_LOG_I("pong startAnimation");
-		//	timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-		//	//timeline().appendTo(&mPongScale, mScaleMax * 4.0f, mDuration, EaseNone());// .delay(1.0f);
-		//	timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mPosDuration, EaseNone());
-		//	
-		//}
-
-
-
-	//}
-	//else {
-		/*mPingPong = true;
-		if (!mPingAnimInProgress) {
-			mPingAnimInProgress = true;
-			CI_LOG_I("ping startAnimation");
-			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-			timeline().appendTo(&mPingScale, mScaleMax * 4.0f, mDuration, EaseNone());// .delay(1.0f);
-			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone());
-		} */
-		//}
-
 }
 void PeoplizationApp::drawContent()
 {
@@ -296,20 +213,15 @@ void PeoplizationApp::drawContent()
 	iZoom0 = mPingScale;
 	iZoom1 = mPongScale;
 
-	/*iPos0x = mPingStart().x;
-	iPos0y = mPingStart().y;
-	iPos1x = mPongStart().x;
-	iPos1y = mPongStart().y; */
-
 	mGlslBlend->uniform("iZoom0", iZoom0);
 	mGlslBlend->uniform("iZoom1", iZoom1);
-	mGlslBlend->uniform("iPos0", vec2(0.5f)); //vec2(iPos0x, iPos0y));
-	mGlslBlend->uniform("iPos1", vec2(0.5f)); //vec2(iPos1x, iPos1y)); //mPongStart());
+	mGlslBlend->uniform("iPos0", vec2(0.5f)); 
+	mGlslBlend->uniform("iPos1", vec2(0.5f));
 
 	mGlslBlend->uniform("iMouse", vec3(mSDAAnimation->getFloatUniformValueByIndex(35), mSDAAnimation->getFloatUniformValueByIndex(36), mSDAAnimation->getFloatUniformValueByIndex(37)));
 	mGlslBlend->uniform("iChannel0", 0); // texture 0
 	mGlslBlend->uniform("iChannel1", 1); // texture 1
-	mGlslBlend->uniform("iBlendmode", iBlendmode); // texture 0
+	mGlslBlend->uniform("iBlendmode", iBlendmode);
 
 	gl::drawSolidRect(getWindowBounds());
 
@@ -332,8 +244,6 @@ void PeoplizationApp::draw()
 
 	// Spout Send
 	mSpoutOut.sendViewport();
-	// Draw the interface
-	//mParams->draw();
 	getWindow()->setTitle(mSDASettings->sFps + " fps SDA");
 }
 

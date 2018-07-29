@@ -305,7 +305,7 @@ void main() {
       c = t1;
       break;
    }
-   vec2 coord = gl_FragCoord.xy;
+   /*vec2 coord = gl_FragCoord.xy;
     vec2 center = iResolution.xy /2.0;
     float dist = length(center - coord);
     
@@ -315,7 +315,7 @@ void main() {
    
     float edge = clamp(dist-5.0,0.0,1.0);
  
-    circlesIn *= 1.0-edge;
+    circlesIn *= 1.0-edge; */
    
-   	gl_FragColor = vec4(c + circlesIn,1.0);
+   	gl_FragColor = vec4(c,1.0);
 }

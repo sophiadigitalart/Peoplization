@@ -26,10 +26,7 @@ int									pingTexIndex, pongTexIndex;
 
 // animation
 ci::Anim<float>						mPingScale, mPongScale;
-//ci::Anim<vec2>						mPingStart;
-//ci::Anim<vec2>						mPongStart;
 float								mDuration;
-float								mPosDuration;
 bool								mPingPong;
 bool								mPingAnimInProgress;
 bool								mPongAnimInProgress;
@@ -59,7 +56,6 @@ public:
 	void draw() override;
 	void cleanup() override;
 	void setUIVisibility(bool visible);
-	void startAnimation();
 private:
 	// Settings
 	SDASettingsRef					mSDASettings;
