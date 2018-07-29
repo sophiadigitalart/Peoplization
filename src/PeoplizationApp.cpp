@@ -25,7 +25,8 @@ PeoplizationApp::PeoplizationApp()
 	mPosDuration = 0.10f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
-	mPingPong = mPingAnimInProgress = mPongAnimInProgress = false;
+	mPingPong = mPingAnimInProgress = false; 
+	mPongAnimInProgress = true;
 	currentTime = 2.0f;
 	mScaleMax = 1.0f;
 	delta = 0.01f;
@@ -59,21 +60,17 @@ PeoplizationApp::PeoplizationApp()
 	mParams->addParam("iPos1y", &iPos1y).keyIncr("u").keyDecr("U").precision(2).step(0.1f);
 	mParams->addParam("iZoom0", &iZoom0).keyIncr("z").keyDecr("Z").precision(2).step(0.1f);
 	mParams->addParam("iZoom1", &iZoom1).keyIncr("e").keyDecr("E").precision(2).step(0.1f);
-
 }
 
 void PeoplizationApp::loadTextures(const ci::DataSourceRef &source) {
 
 	JsonTree json(source);
-
 	// try to load the specified json file
 	if (json.hasChild("textures")) {
 		JsonTree u(json.getChild("textures"));
-
 		// iterate textures
 		for (size_t i = 0; i < u.getNumChildren(); i++) {
 			JsonTree child(u.getChild(i));
-
 			if (child.hasChild("texture")) {
 				JsonTree w(child.getChild("texture"));
 				textureFromJson(child);
@@ -90,14 +87,14 @@ void PeoplizationApp::textureFromJson(const ci::JsonTree &json) {
 		jName = (u.hasChild("name")) ? u.getValueForKey<string>("name") : "unknown";
 		jCtrlIndex = (u.hasChild("index")) ? u.getValueForKey<int>("index") : 249;
 		jValue = (u.hasChild("value")) ? u.getValueForKey<float>("value") : 0.01f;
-		jPosX = (u.hasChild("posx")) ? u.getValueForKey<float>("posx") : 0.56f;
-		jPosY = (u.hasChild("posy")) ? u.getValueForKey<float>("posy") : 0.73f;
-		fs::path fullPath = getAssetPath("") / "sequence" / jName;
+		//jPosX = (u.hasChild("posx")) ? u.getValueForKey<float>("posx") : 0.56f;
+		//jPosY = (u.hasChild("posy")) ? u.getValueForKey<float>("posy") : 0.73f;
+		fs::path fullPath = getAssetPath("") / "seq" / jName;
 		if (fs::exists(fullPath)) {
 			Tex mTex;
 			mTex.mTexture = ci::gl::Texture::create(ci::loadImage(fullPath));
-			mTex.mPosStart = vec2(jPosX, jPosY);
-			mTex.mPosEnd = vec2(jPosX, jPosY);
+			//mTex.mPosStart = vec2(-0.5f);// vec2(jPosX, jPosY);
+			//mTex.mPosEnd = vec2(-0.5f);//vec2(jPosX, jPosY);
 			mTexs.push_back(mTex);
 		}
 	}
@@ -185,11 +182,11 @@ void PeoplizationApp::startAnimation()
 		timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
 
 	}
-	*/
+
 	pingTexIndex += 1;
 	mPingScale = zoomStart;
 	mPingStart = vec2(xStart, yStart);
-	mPingAnimInProgress = false;
+	mPingAnimInProgress = false;*/
 }
 void PeoplizationApp::keyDown(KeyEvent event)
 {
@@ -221,7 +218,7 @@ void nextPingTexture()
 	pingTexIndex += 2;
 	mPingScale = zoomStart;
 	//mPingStart = vec2(xStart, yStart);
-	mPingStart = mTexs[pingTexIndex].mPosStart;
+	//mPingStart = mTexs[pingTexIndex].mPosStart;
 
 	mPingAnimInProgress = false;
 }
@@ -230,7 +227,7 @@ void nextPongTexture()
 	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
 	mPongScale = zoomStart;
-	mPongStart = vec2(xStart, yStart);
+	//mPongStart = vec2(xStart, yStart);
 	mPongAnimInProgress = false;
 }
 void PeoplizationApp::update()
@@ -241,9 +238,16 @@ void PeoplizationApp::update()
 	if (!mPingAnimInProgress) {
 		mPingAnimInProgress = true;
 		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone());
-		//timeline().appendTo(&mPingScale, mScaleMax * 2.0f, mDuration, EaseNone());
+		timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+		timeline().appendTo(&mPingScale, mScaleMax * 24.0f, mDuration, EaseNone()).finishFn(nextPingTexture);
 		//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone());// .finishFn(nextPongTexture);
+	}
+	if (!mPongAnimInProgress) {
+		mPongAnimInProgress = true;
+		CI_LOG_I("pong startAnimation");
+		timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone());
+		timeline().appendTo(&mPongScale, mScaleMax * 24.0f, mDuration, EaseNone());// .delay(1.0f);
+		//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mPosDuration, EaseNone());
 	}
 	/*if (delta > mDuration) {
 		CI_LOG_I("ping");
@@ -291,16 +295,16 @@ void PeoplizationApp::drawContent()
 	mGlslBlend->uniform("iResolution", vec3(mSDASettings->mRenderWidth, mSDASettings->mRenderHeight, 1.0));
 	iZoom0 = mPingScale;
 	iZoom1 = mPongScale;
-	
-	iPos0x = mPingStart().x;
+
+	/*iPos0x = mPingStart().x;
 	iPos0y = mPingStart().y;
 	iPos1x = mPongStart().x;
-	iPos1y = mPongStart().y; 
+	iPos1y = mPongStart().y; */
 
 	mGlslBlend->uniform("iZoom0", iZoom0);
 	mGlslBlend->uniform("iZoom1", iZoom1);
-	mGlslBlend->uniform("iPos0", mPingStart()); //vec2(iPos0x, iPos0y));
-	mGlslBlend->uniform("iPos1", vec2(iPos1x, iPos1y)); //mPongStart());
+	mGlslBlend->uniform("iPos0", vec2(0.5f)); //vec2(iPos0x, iPos0y));
+	mGlslBlend->uniform("iPos1", vec2(0.5f)); //vec2(iPos1x, iPos1y)); //mPongStart());
 
 	mGlslBlend->uniform("iMouse", vec3(mSDAAnimation->getFloatUniformValueByIndex(35), mSDAAnimation->getFloatUniformValueByIndex(36), mSDAAnimation->getFloatUniformValueByIndex(37)));
 	mGlslBlend->uniform("iChannel0", 0); // texture 0
