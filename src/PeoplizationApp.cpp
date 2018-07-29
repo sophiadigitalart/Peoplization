@@ -21,14 +21,14 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
-	mDuration = 5.5f;
+	mDuration = 1.0f;
 	mPosDuration = 0.10f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
 	mPingPong = mPingAnimInProgress = false; 
 	mPongAnimInProgress = true;
 	currentTime = 2.0f;
-	mScaleMax = 1.0f;
+	mScaleMax = 1.5f;
 	delta = 0.01f;
 	mPingScale = mPongScale = iZoom0 = iZoom1 = zoomStart;
 	iPos0x = iPos1x = xStart;
@@ -238,15 +238,15 @@ void PeoplizationApp::update()
 	if (!mPingAnimInProgress) {
 		mPingAnimInProgress = true;
 		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-		timeline().appendTo(&mPingScale, mScaleMax * 24.0f, mDuration, EaseNone()).finishFn(nextPingTexture);
+		timeline().apply(&mPingScale, mScaleMax, mDuration * 1.5f, EaseNone()).finishFn(nextPongTexture);
+		timeline().appendTo(&mPingScale, mScaleMax * 40.0f, mDuration, EaseNone());
 		//timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone());// .finishFn(nextPongTexture);
 	}
 	if (!mPongAnimInProgress) {
 		mPongAnimInProgress = true;
 		CI_LOG_I("pong startAnimation");
-		timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone());
-		timeline().appendTo(&mPongScale, mScaleMax * 24.0f, mDuration, EaseNone());// .delay(1.0f);
+		timeline().apply(&mPongScale, mScaleMax, mDuration * 1.5f, EaseNone()).finishFn(nextPingTexture);
+		timeline().appendTo(&mPongScale, mScaleMax * 40.0f, mDuration, EaseNone());// .delay(1.0f);
 		//timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mPosDuration, EaseNone());
 	}
 	/*if (delta > mDuration) {
