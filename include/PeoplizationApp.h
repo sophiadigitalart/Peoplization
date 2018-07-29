@@ -29,6 +29,7 @@ ci::Anim<float>						mPingScale, mPongScale;
 ci::Anim<vec2>						mPingStart;
 ci::Anim<vec2>						mPongStart;
 float								mDuration;
+float								mPosDuration;
 bool								mPingPong;
 bool								mPingAnimInProgress;
 bool								mPongAnimInProgress;

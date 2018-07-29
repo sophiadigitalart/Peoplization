@@ -1,11 +1,5 @@
 #include "PeoplizationApp.h"
-/*
-z 0.001 x y -500
-z 0.01 x y -50
-z 0.1 x y
-z 1 x y 0
-z 2 x y 0.2
-*/
+
 PeoplizationApp::PeoplizationApp()
 	: mSpoutOut("SDA", app::getWindowSize())
 {
@@ -27,10 +21,12 @@ PeoplizationApp::PeoplizationApp()
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 
 	// initialize 
-	mDuration = 3.5f;
+	mDuration = 5.5f;
+	mPosDuration = 0.10f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
-	mPingPong = mPingAnimInProgress = mPongAnimInProgress = false;
+	mPingPong = mPongAnimInProgress = false;
+	mPingAnimInProgress = true;
 	currentTime = 2.0f;
 	mScaleMax = 1.0f;
 	delta = 0.01f;
@@ -156,19 +152,10 @@ void PeoplizationApp::mouseDown(MouseEvent event)
 		iPos0y = (float)event.getY() / (float)mSDASettings->mRenderHeight;
 
 	}
-	/*iBlendmode++;
-	if (iBlendmode > 26) iBlendmode = 0;
-	if (!mSDASession->handleMouseDown(event)) {
-		// let your application perform its mouseDown handling here
-		if (event.isRightDown()) {
-		}
-	} */
 }
 void PeoplizationApp::mouseDrag(MouseEvent event)
 {
 	if (!mSDASession->handleMouseDrag(event)) {
-		// let your application perform its mouseDrag handling here
-		//mTexs[texIndex]->setSpeed((float)event.getX() / (float)getWindowWidth() / 10.0f);
 	}
 }
 void PeoplizationApp::mouseUp(MouseEvent event)
@@ -247,32 +234,40 @@ void PeoplizationApp::update()
 	mSDASession->setFloatUniformValueByIndex(mSDASettings->IFPS, getAverageFps());
 	mSDASession->update();
 	delta = getElapsedSeconds() - currentTime;
-	if (delta > mDuration) { // 6.0f) {
+	/*if (delta > mDuration) { 
 		CI_LOG_I("ping");
 		currentTime = getElapsedSeconds();
-		//mPingPong = !mPingPong;
-		//startAnimation();
-	}
-	if (delta > mDuration / 2.0f) {
-		mPingPong = false;
+		
+	} */
+	//if (delta > mDuration) {
+		//currentTime = getElapsedSeconds();
+		//mPingPong = false;
 		if (!mPongAnimInProgress) {
 			mPongAnimInProgress = true;
 			CI_LOG_I("pong startAnimation");
-			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPingTexture);
-			timeline().appendTo(&mPongScale, mScaleMax * 54.0f, mDuration, EaseNone());// .delay(1.0f);
-			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mDuration, EaseNone());
+			timeline().apply(&mPongScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
+			//timeline().appendTo(&mPongScale, mScaleMax * 4.0f, mDuration, EaseNone());// .delay(1.0f);
+			timeline().apply(&mPongStart, mTexs[pongTexIndex].mPosEnd, mPosDuration, EaseNone());
+			
 		}
-	}
-	else {
-		mPingPong = true;
+		/*if (!mPingAnimInProgress) {
+			mPingAnimInProgress = true;
+			CI_LOG_I("ping startAnimation");
+			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone());
+			timeline().appendTo(&mPingScale, mScaleMax * 4.0f, mDuration, EaseNone());// .delay(1.0f);
+			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone()).finishFn(nextPongTexture);
+		} */
+	//}
+	//else {
+		/*mPingPong = true;
 		if (!mPingAnimInProgress) {
 			mPingAnimInProgress = true;
 			CI_LOG_I("ping startAnimation");
 			timeline().apply(&mPingScale, mScaleMax, mDuration, EaseNone()).finishFn(nextPongTexture);
-			timeline().appendTo(&mPingScale, mScaleMax * 54.0f, mDuration, EaseNone());// .delay(1.0f);
-			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mDuration, EaseNone());
-		}
-	}
+			timeline().appendTo(&mPingScale, mScaleMax * 4.0f, mDuration, EaseNone());// .delay(1.0f);
+			timeline().apply(&mPingStart, mTexs[pingTexIndex].mPosEnd, mPosDuration, EaseNone());
+		} */
+	//}
 
 }
 void PeoplizationApp::drawContent()
