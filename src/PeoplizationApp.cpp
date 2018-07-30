@@ -17,6 +17,16 @@ PeoplizationApp::PeoplizationApp()
 	mFadeInDelay = true;
 	// windows
 	mIsShutDown = false;
+#ifdef _DEBUG
+	
+	mSDASettings->mRenderX = mSDASettings->mRenderY = 100;
+	mSDASettings->mRenderWidth = 1280;
+	mSDASettings->mRenderHeight = 720;
+	
+#else
+
+#endif  // _DEBUG
+
 	mRenderWindowTimer = 0.0f;
 	timeline().apply(&mRenderWindowTimer, 1.0f, 2.0f).finishFn([&] { positionRenderWindow(); });
 

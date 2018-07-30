@@ -1,324 +1,834 @@
 {
-   "textures" : [
-      {
-         "texture" : {
-            "index" : 0,
-            "posx" : 0.28,
-            "posy" : 0.67,
-            "name" : "p0001.jpg",
-            "type" : 0,
-            "value" : 0
-         }
-      },
-      {
-        "texture": {
-          "index": 1,
-          "posx": 0.57,
-          "posy": 0.57,
-          "name": "p0002.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-         "texture" : {
-            "index" : 2,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0003.jpg",
-            "type" : 0,
-            "value" : 0.29999999999999999
-         }
-      },
-      {
-         "texture" : {
-            "index" : 3,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0004.jpg",
-            "type" : 0,
-            "value" : 0
-         }
-      },
-      {
-         "texture" : {
-            "index" : 4,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0005.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-        "texture": {
-          "index": 5,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0006.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-        "texture": {
-          "index": 6,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0007.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-        "texture": {
-          "index": 7,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0008.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-        "texture": {
-          "index": 8,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0009.jpg",
-          "type": 0,
-          "value": 0
-        }
-      },
-      {
-        "texture": {
-          "index": 9,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0010.jpg",
-          "type": 0,
-          "value": 0
-        }
-      },
-      {
-        "texture": {
-          "index": 10,
-          "posx": 0.5628,
-          "posy": 0.73,
-          "name": "p0011.jpg",
-          "type": 0,
-          "value": 16
-        }
-      },
-      {
-        "texture": {
-          "index": 11,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0012.jpg",
-          "type": 0,
-          "value": 20
-        }
-      },
-      {
-        "texture": {
-          "index": 12,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0013.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-         "texture" : {
-            "index" : 13,
-            "posx" : 0.562,
-            "posy" : 0.73,
-            "name" : "p0014.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-        "texture": {
-          "index": 14,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0015.jpg",
-          "type": 0,
-          "value": 1
-        }
-      },
-      {
-         "texture" : {
-            "index" : 15,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0016.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-         "texture" : {
-            "index" : 16,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0017.jpg",
-            "type" : 0,
-            "value" : 0
-         }
-      },
-      {
-        "texture": {
-          "index": 17,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0018.jpg",
-          "type": 0,
-          "value": 0
-        }
-      },
-      {
-         "texture" : {
-            "index" : 18,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0019.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-         "texture" : {
-            "index" : 19,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0020.jpg",
-            "type" : 0,
-            "value" : 0.10000000000000001
-         }
-      },
-      {
-         "texture" : {
-            "index" : 20,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0021.jpg",
-            "type" : 0,
-            "value" : 0.5
-         }
-      },
-      {
-         "texture" : {
-            "index" : 21,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0022.jpg",
-            "type" : 0,
-            "value" : 0.10000000000000001
-         }
-      },
-      {
-         "texture" : {
-            "index" : 22,
-            "posx" : 0.562,
-            "posy" : 0.73,
-            "name" : "p0023.jpg",
-            "type" : 0,
-            "value" : 12
-         }
-      },
-      {
-         "texture" : {
-            "index" : 23,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0024.jpg",
-            "type" : 0,
-            "value" : 0.20000000000000001
-         }
-      },
-      {
-         "texture" : {
-            "index" : 24,
-            "posx" : 0.56,
-            "posy" : 0.73,
-            "name" : "p0025.jpg",
-            "type" : 0,
-            "value" : 0.10000000000000001
-         }
-      },
-      {
-        "texture": {
-          "index": 25,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0026.jpg",
-          "type": 0,
-          "value": 60
-        }
-      },
-      {
-        "texture": {
-          "index": 26,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0027.jpg",
-          "type": 0,
-          "value": 0
-        }
-      },
-      {
-         "texture" : {
-            "index" : 27,
-            "posx" : 0.5600,
-            "posy" : 0.73,
-            "name" : "p0028.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-         "texture" : {
-            "index" : 28,
-            "posx" : 0.5600,
-            "posy" : 0.73,
-            "name" : "p0029.jpg",
-            "type" : 0,
-            "value" : 1
-         }
-      },
-      {
-         "texture" : {
-            "index" : 29,
-            "posx" : 0.56280,
-            "posy" : 0.73,
-            "name" : "p0030.jpg",
-            "type" : 0,
-            "value" : 640
-         }
-      },
-      {
-        "texture": {
-          "index": 30,
-          "posx": 0.56,
-          "posy": 0.73,
-          "name": "p0031.jpg",
-          "type": 0,
-          "value": 480
-        }
-      },
-      {
-        "texture": {
-          "index": 31,
-          "posx": 0.56,
-          "posy": "0.73",
-          "name": "p0032.jpg",
-          "type": 0,
-          "value": 0
-        }
+  "textures": [
+    {
+      "texture": {
+        "index": 0,
+        "posx": 0.28,
+        "posy": 0.67,
+        "name": "p0001.jpg",
+        "type": 0,
+        "value": 0
       }
-   ]
+    },
+    {
+      "texture": {
+        "index": 1,
+        "posx": 0.57,
+        "posy": 0.57,
+        "name": "p0002.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 2,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0003.jpg",
+        "type": 0,
+        "value": 0.29999999999999999
+      }
+    },
+    {
+      "texture": {
+        "index": 3,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0004.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 4,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0005.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 5,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0006.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 6,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0007.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 7,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0008.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 8,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0009.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 9,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0010.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 10,
+        "posx": 0.5628,
+        "posy": 0.73,
+        "name": "p0011.jpg",
+        "type": 0,
+        "value": 16
+      }
+    },
+    {
+      "texture": {
+        "index": 11,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0012.jpg",
+        "type": 0,
+        "value": 20
+      }
+    },
+    {
+      "texture": {
+        "index": 12,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0013.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 13,
+        "posx": 0.562,
+        "posy": 0.73,
+        "name": "p0014.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 14,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0015.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 15,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0016.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 16,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0017.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 17,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0018.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 18,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0019.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 19,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0020.jpg",
+        "type": 0,
+        "value": 0.10000000000000001
+      }
+    },
+    {
+      "texture": {
+        "index": 20,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0021.jpg",
+        "type": 0,
+        "value": 0.5
+      }
+    },
+    {
+      "texture": {
+        "index": 21,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0022.jpg",
+        "type": 0,
+        "value": 0.10000000000000001
+      }
+    },
+    {
+      "texture": {
+        "index": 22,
+        "posx": 0.562,
+        "posy": 0.73,
+        "name": "p0023.jpg",
+        "type": 0,
+        "value": 12
+      }
+    },
+    {
+      "texture": {
+        "index": 23,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0024.jpg",
+        "type": 0,
+        "value": 0.20000000000000001
+      }
+    },
+    {
+      "texture": {
+        "index": 24,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0025.jpg",
+        "type": 0,
+        "value": 0.10000000000000001
+      }
+    },
+    {
+      "texture": {
+        "index": 25,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0026.jpg",
+        "type": 0,
+        "value": 60
+      }
+    },
+    {
+      "texture": {
+        "index": 26,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0027.jpg",
+        "type": 0,
+        "value": 0
+      }
+    },
+    {
+      "texture": {
+        "index": 27,
+        "posx": 0.5600,
+        "posy": 0.73,
+        "name": "p0028.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 28,
+        "posx": 0.5600,
+        "posy": 0.73,
+        "name": "p0029.jpg",
+        "type": 0,
+        "value": 1
+      }
+    },
+    {
+      "texture": {
+        "index": 29,
+        "posx": 0.56280,
+        "posy": 0.73,
+        "name": "p0030.jpg",
+        "type": 0,
+        "value": 640
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0031.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0032.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0033.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0034.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0035.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0036.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0037.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0038.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0039.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0040.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0041.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0042.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0043.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0044.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0045.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0046.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0047.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0048.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0049.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0050.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0051.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0052.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0053.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0054.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0055.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0056.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0057.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0058.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0059.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0060.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0061.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0062.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0063.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0064.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0065.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0066.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0067.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0068.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0069.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0070.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0071.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0072.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0073.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0074.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0075.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0076.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0077.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0078.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0079.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0080.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0081.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0082.jpg",
+        "type": 0,
+        "value": 480
+      }
+    },
+    {
+      "texture": {
+        "index": 30,
+        "posx": 0.56,
+        "posy": 0.73,
+        "name": "p0083.jpg",
+        "type": 0,
+        "value": 480
+      }
+    }
+  ]
 }
