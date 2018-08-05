@@ -27,10 +27,12 @@ int									pingTexIndex, pongTexIndex;
 // animation
 ci::Anim<float>						mPingScale, mPongScale;
 float								mDuration;
+bool								mReverse;
 bool								mPingPong;
 bool								mPingAnimInProgress;
 bool								mPongAnimInProgress;
 const float							zoomStart = 0.01f;
+const float							zoomEnd = 40 * 1.5f;
 const float							xStart = 0.0f;
 const float							yStart = 0.0f;
 

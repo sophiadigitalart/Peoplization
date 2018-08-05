@@ -34,7 +34,7 @@ PeoplizationApp::PeoplizationApp()
 	mDuration = 2.0f;
 	pingTexIndex = 0;
 	pongTexIndex = 1;
-	mPingPong = mPingAnimInProgress = false; 
+	mPingPong = mPingAnimInProgress = mReverse = false;
 	mPongAnimInProgress = true;
 	currentTime = 2.0f;
 	mScaleMax = 1.5f;
@@ -174,20 +174,23 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
 		setUIVisibility(mSDASettings->mCursorVisible);
 		break;
+	case KeyEvent::KEY_r:
+		mReverse = !mReverse;
+		break;
 	}
 }
 void nextPingTexture()
 {
 	CI_LOG_I("nextPingTexture");
 	pingTexIndex += 2;
-	mPingScale = zoomStart;
+	mPingScale = mReverse ? zoomEnd : zoomStart;
 	mPingAnimInProgress = false;
 }
 void nextPongTexture()
 {
 	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
-	mPongScale = zoomStart;
+	mPongScale = mReverse ? zoomEnd : zoomStart;
 	mPongAnimInProgress = false;
 }
 void PeoplizationApp::update()
@@ -198,14 +201,29 @@ void PeoplizationApp::update()
 	if (!mPingAnimInProgress) {
 		mPingAnimInProgress = true;
 		CI_LOG_I("ping startAnimation");
-		timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
-		timeline().appendTo(&mPingScale, mScaleMax * 40.0f, mDuration, EaseNone());
+		if (mReverse) {
+			timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
+			timeline().appendTo(&mPingScale, 0.0f , mDuration, EaseNone());
+
+		}
+		else {
+			timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
+			timeline().appendTo(&mPingScale, mScaleMax * 40.0f, mDuration, EaseNone());
+
+		}
 	}
 	if (!mPongAnimInProgress) {
 		mPongAnimInProgress = true;
 		CI_LOG_I("pong startAnimation");
-		timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
-		timeline().appendTo(&mPongScale, mScaleMax * 40.0f, mDuration, EaseNone());
+		if (mReverse) {
+			timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
+			timeline().appendTo(&mPongScale, 0.0f , mDuration, EaseNone());
+
+		}
+		else {
+			timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
+			timeline().appendTo(&mPongScale, mScaleMax * 40.0f, mDuration, EaseNone());
+		}
 	}
 }
 void PeoplizationApp::drawContent()
