@@ -1,5 +1,7 @@
 #include "PeoplizationApp.h"
-
+// alternance g d intérieurs
+// enlever tete carrées
+// voir tulle avec seb + vp derriere
 PeoplizationApp::PeoplizationApp()
 	: mSpoutOut("SDA", app::getWindowSize())
 {
