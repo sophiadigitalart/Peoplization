@@ -101,7 +101,7 @@ private:
 	float							iZoom0;
 	float							iZoom1;
 
-	void drawContent();
+	void							drawContent();
 	// ui
 	//params::InterfaceGlRef			mParams;
 };

@@ -239,6 +239,9 @@
     <None Include="..\assets\texturesjpg.json">
       <Filter>assets</Filter>
     </None>
+    <None Include="..\assets\passthrough.vs">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\assets\defaulttextures.xml">
