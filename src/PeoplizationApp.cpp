@@ -3,7 +3,7 @@
 // enlever tete carrées
 // voir tulle avec seb + vp derriere
 PeoplizationApp::PeoplizationApp()
-	: mSpoutOut("SDA", app::getWindowSize())
+	: mSpoutOut("Peoplization", app::getWindowSize())
 {
 	// Settings
 	mSDASettings = SDASettings::create();
