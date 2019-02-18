@@ -6,7 +6,7 @@ PeoplizationApp::PeoplizationApp()
 	: mSpoutOut("Peoplization", app::getWindowSize())
 {
 	// Settings
-	mSDASettings = SDASettings::create();
+	mSDASettings = SDASettings::create("Peoplization");
 	// Session
 	mSDASession = SDASession::create(mSDASettings);
 	// Animation
@@ -274,12 +274,13 @@ void PeoplizationApp::draw()
 
 	// Spout Send
 	mSpoutOut.sendViewport();
-	getWindow()->setTitle(mSDASettings->sFps + " fps SDA");
+	getWindow()->setTitle(mSDASettings->sFps + " fps Peoplization");
 }
 
 void prepareSettings(App::Settings *settings)
 {
 	settings->setWindowSize(640, 480);
+	settings->setConsoleWindowEnabled();
 }
 
 CINDER_APP(PeoplizationApp, RendererGl, prepareSettings)

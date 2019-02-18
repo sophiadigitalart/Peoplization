@@ -45,6 +45,9 @@
     <Filter Include="assets">
       <UniqueIdentifier>{407e0a4a-6b7f-46ff-86d0-6e88894e5421}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Blocks\OSC">
+      <UniqueIdentifier>{1859985e-f6e4-425a-a8b0-3f38dc4ef146}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\PeoplizationApp.cpp">
@@ -185,6 +188,9 @@
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketServer.h">
       <Filter>Blocks\Cinder-WebSocketPP\src</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.cpp">
+      <Filter>Blocks\OSC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
@@ -192,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="..\include\PeoplizationApp.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.h">
+      <Filter>Blocks\OSC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
