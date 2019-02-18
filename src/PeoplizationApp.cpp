@@ -150,7 +150,10 @@ void PeoplizationApp::mouseUp(MouseEvent event)
 
 void PeoplizationApp::keyUp(KeyEvent event)
 {
-	if (!mSDASession->handleKeyUp(event)) {
+	switch (event.getCode()) {
+	case KeyEvent::KEY_b:
+		iBlendmode = 8;
+		break;
 	}
 }
 
@@ -167,7 +170,10 @@ void PeoplizationApp::keyDown(KeyEvent event)
 		pongTexIndex += 2;
 		if (pongTexIndex > mTexs.size() - 1) pongTexIndex = 1;
 		break;
-
+	case KeyEvent::KEY_b:
+		iBlendmode++;
+		if (iBlendmode>25) iBlendmode = 0;
+		break;
 	case KeyEvent::KEY_h:
 		// mouse cursor and ui visibility
 		mSDASettings->mCursorVisible = !mSDASettings->mCursorVisible;
