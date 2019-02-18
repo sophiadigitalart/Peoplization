@@ -19,14 +19,11 @@ PeoplizationApp::PeoplizationApp()
 	mFadeInDelay = true;
 	// windows
 	mIsShutDown = false;
-#ifdef _DEBUG
-	
+#ifdef _DEBUG	
 	mSDASettings->mRenderX = mSDASettings->mRenderY = 100;
 	mSDASettings->mRenderWidth = 1280;
 	mSDASettings->mRenderHeight = 720;
-	
 #else
-
 #endif  // _DEBUG
 
 	mRenderWindowTimer = 0.0f;
@@ -183,16 +180,16 @@ void PeoplizationApp::keyDown(KeyEvent event)
 }
 void nextPingTexture()
 {
-	CI_LOG_I("nextPingTexture");
 	pingTexIndex += 2;
 	mPingScale = mReverse ? zoomEnd : zoomStart;
+	CI_LOG_I("nextPingTexture:"+toString(pingTexIndex));
 	mPingAnimInProgress = false;
 }
 void nextPongTexture()
 {
-	CI_LOG_I("nextPongTexture");
 	pongTexIndex += 2;
 	mPongScale = mReverse ? zoomEnd : zoomStart;
+	CI_LOG_I("nextPongTexture:"+toString(pongTexIndex));
 	mPongAnimInProgress = false;
 }
 void PeoplizationApp::update()
@@ -206,12 +203,10 @@ void PeoplizationApp::update()
 		if (mReverse) {
 			timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
 			timeline().appendTo(&mPingScale, 0.0f , mDuration, EaseNone());
-
 		}
 		else {
 			timeline().apply(&mPingScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPongTexture);
 			timeline().appendTo(&mPingScale, mScaleMax * 40.0f, mDuration, EaseNone());
-
 		}
 	}
 	if (!mPongAnimInProgress) {
@@ -220,7 +215,6 @@ void PeoplizationApp::update()
 		if (mReverse) {
 			timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
 			timeline().appendTo(&mPongScale, 0.0f , mDuration, EaseNone());
-
 		}
 		else {
 			timeline().apply(&mPongScale, mScaleMax, mDuration * 1.1f, EaseNone()).finishFn(nextPingTexture);
@@ -280,7 +274,11 @@ void PeoplizationApp::draw()
 void prepareSettings(App::Settings *settings)
 {
 	settings->setWindowSize(640, 480);
+	
+#ifdef _DEBUG
 	settings->setConsoleWindowEnabled();
+#else
+#endif  // _DEBUG
 }
 
 CINDER_APP(PeoplizationApp, RendererGl, prepareSettings)
